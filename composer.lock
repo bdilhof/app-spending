@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "129301fb2ef8d58291739791f403a681",
+    "content-hash": "0b3505add6014330ddaeb1a95c9fd6ad",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1481,102 +1481,6 @@
                 }
             ],
             "time": "2024-02-05T11:56:58+00:00"
-        },
-        {
-            "name": "dpb/manuals",
-            "version": "1.0",
-            "dist": {
-                "type": "path",
-                "url": "app-modules/manuals",
-                "reference": "4487d9e9ea0178d99dfeb6e1890b3781942d9382"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Dpb\\Manuals\\Providers\\ManualsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dpb\\Manuals\\": "src/",
-                    "Dpb\\Manuals\\Tests\\": "tests/",
-                    "Dpb\\Manuals\\Database\\Factories\\": "database/factories/",
-                    "Dpb\\Manuals\\Database\\Seeders\\": "database/seeders/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "dpb/outbounds",
-            "version": "1.0",
-            "dist": {
-                "type": "path",
-                "url": "app-modules/outbounds",
-                "reference": "86f5527c3289f878f11b303c964ffc5952db9627"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Dpb\\Outbounds\\Providers\\OutboundsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dpb\\Outbounds\\": "src/",
-                    "Dpb\\Outbounds\\Tests\\": "tests/",
-                    "Dpb\\Outbounds\\Database\\Factories\\": "database/factories/",
-                    "Dpb\\Outbounds\\Database\\Seeders\\": "database/seeders/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "dpb/tickets",
-            "version": "1.0",
-            "dist": {
-                "type": "path",
-                "url": "app-modules/tickets",
-                "reference": "0a30e4582fd5b1e19ea7ff29c509da3fe4393376"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Dpb\\Tickets\\Providers\\TicketsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dpb\\Tickets\\": "src/",
-                    "Dpb\\Tickets\\Tests\\": "tests/",
-                    "Dpb\\Tickets\\Database\\Factories\\": "database/factories/",
-                    "Dpb\\Tickets\\Database\\Seeders\\": "database/seeders/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "dragonmantank/cron-expression",

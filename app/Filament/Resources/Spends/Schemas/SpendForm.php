@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Spends\Schemas;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Schema;
 
 class SpendForm
@@ -13,9 +15,16 @@ class SpendForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                TextInput::make('price')
+                TextInput::make('amount')
+                    ->numeric()
+                    ->inputMode('decimal')
                     ->required(),
-                TextInput::make('category')
+                DatePicker::make('date')
+                    ->required(),
+                Select::make('category_id')
+                    ->preload()
+                    ->searchable()
+                    ->relationship(name: 'category', titleAttribute: 'title')
                     ->required(),
             ]);
     }

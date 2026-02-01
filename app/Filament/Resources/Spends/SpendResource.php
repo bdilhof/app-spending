@@ -32,13 +32,6 @@ class SpendResource extends Resource
         return SpendsTable::configure($table);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [

@@ -15,10 +15,12 @@ class SpendsTable
         return $table
             ->columns([
                 TextColumn::make('title')
+                    ->grow()
                     ->searchable(),
-                TextColumn::make('price')
+                TextColumn::make('amount')
+                    ->money('EUR')
                     ->searchable(),
-                TextColumn::make('category')
+                TextColumn::make('category.title')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

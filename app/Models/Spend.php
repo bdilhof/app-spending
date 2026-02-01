@@ -10,7 +10,13 @@ class Spend extends Model
 
     protected $fillable = [
         'title',
-        'price',
-        'category',
+        'amount',
+        'date',
+        'category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

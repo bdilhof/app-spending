@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('app_spends', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('price');
-            $table->string('category');
+            $table->decimal('amount');
+
+            $table->foreignId('category_id')
+                ->constrained('app_spend_categories')
+                ->cascadeOnDelete();
+
+            $table->date('date');
             $table->timestamps();
         });
     }
