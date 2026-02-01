@@ -7,17 +7,14 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use App\Filament\Imports\SpendImporter;
-use Filament\Actions\ImportAction;
+use Filament\Tables\Filters\SelectFilter;
 
 class SpendsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->headerActions([
-                ImportAction::make()->importer(SpendImporter::class)
-            ])
+            ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('title')
                     ->grow()
@@ -37,7 +34,8 @@ class SpendsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->relationship('category', 'title')
             ])
             ->recordActions([
                 EditAction::make(),
