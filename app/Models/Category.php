@@ -11,6 +11,7 @@ class Category extends Model
 
     protected $fillable = [
         'title',
+        'budget',
     ];
 
     /**
@@ -18,7 +19,14 @@ class Category extends Model
      */
     public function getTotalSpendedAttribute()
     {
-        return formatCurrency($this->spends->sum('amount'));
+        return $this->spends->sum('amount');
+    }
+
+    public function getRemainingAmountAttribute()
+    {
+        $remains = $this->budget - $this->totalSpended;
+
+        return $remains;
     }
 
     /**

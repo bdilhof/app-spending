@@ -43,7 +43,7 @@ class Create extends Component
     public function render()
     {
         $items = Category::all();
-        $spends = Spend::all();
+        $spends = Spend::query()->orderBy('date', 'desc')->get();
 
         return view('livewire.pages.item.create', [
             'items' => $items,

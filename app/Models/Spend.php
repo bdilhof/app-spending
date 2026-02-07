@@ -8,6 +8,10 @@ class Spend extends Model
 {
     protected $table = 'app_spends';
 
+    protected $casts = [
+        'date' => 'date',
+    ];
+
     protected $fillable = [
         'title',
         'amount',
