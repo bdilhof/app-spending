@@ -28,4 +28,34 @@
         <button type="submit">Save</button>
     </form>
 
-</div>
+    <div>
+        @foreach($items as $category)
+        <div>
+            {{ $category->title }}: {{ $category->totalSpended }}
+        </div>
+        <hr>
+        @endforeach
+    </div>
+
+    <table style="margin-top: 30px">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($spends as $spend)
+            <tr>
+                <td>{{ $spend->date }}</td>
+                <td>{{ $spend->title }}</td>
+                <td>{{ formatCurrency($spend->amount) }}</td>
+                <td>{{ $spend->category->title }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </div>
+
+</table>

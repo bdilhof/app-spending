@@ -1,3 +1,4 @@
+/*
 import {
     Livewire,
     Alpine,
@@ -7,3 +8,4 @@ import Clipboard from "@ryangjchandler/alpine-clipboard";
 Alpine.plugin(Clipboard);
 
 Livewire.start();
+*/

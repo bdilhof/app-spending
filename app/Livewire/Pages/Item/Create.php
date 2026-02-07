@@ -21,6 +21,11 @@ class Create extends Component
     #[Validate('required')]
     public $date = '';
 
+    public function mount()
+    {
+        $this->date = now()->format('Y-m-d');
+    }
+
     public function save()
     {
         $this->validate();
@@ -32,15 +37,17 @@ class Create extends Component
             'date'
         ]));
 
-        dd('Hotovo.');
+        return $this->redirect('/');
     }
 
     public function render()
     {
         $items = Category::all();
+        $spends = Spend::all();
 
         return view('livewire.pages.item.create', [
             'items' => $items,
+            'spends' => $spends,
         ]);
     }
 }
