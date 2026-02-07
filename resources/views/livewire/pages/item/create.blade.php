@@ -42,7 +42,7 @@
                         <th>Rozpočet</th>
                         <th>Minuté</th>
                         <th>Ostáva</th>
-                        <th>Teplomer</th>
+                        <th style="width: 300px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,15 @@
                     @endphp
                     <tr>
                         <td>{{ $category->title }}</td>
-                        <td>{{ $category->budget ?? 0 }}</td>
-                        <td>{{ $category->totalSpended }}</td>
-                        <td>{{ $category->remainingAmount }}</td>
+                        <td class="{{ $category->budget ? '': 'text-warning' }}">
+                            @if ($category->budget)
+                                {{ formatCurrency($category->budget) }}
+                            @else
+                                (nie je nastavený)
+                            @endif
+                        </td>
+                        <td>{{ formatCurrency($category->totalSpended) }}</td>
+                        <td>{{ formatCurrency($category->remainingAmount) }}</td>
                         <td>
                             <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style="width: {{ $percentage }}%"></div>
