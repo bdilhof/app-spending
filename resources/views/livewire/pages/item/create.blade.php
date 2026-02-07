@@ -51,8 +51,8 @@
                         <tr>
                             <th>Kategória</th>
                             <th>Rozpočet</th>
-                            <th>Minuté</th>
-                            <th>Ostáva</th>
+                            <th class="text-right">Minuté</th>
+                            <th class="text-right">Ostáva</th>
                             <th style="width: 300px"></th>
                         </tr>
                     </thead>
@@ -76,8 +76,14 @@
                                         <span class="text-muted">(nie je nastavený)</span>
                                     @endif
                                 </td>
-                                <td>{{ formatCurrency($category->totalSpended) }}</td>
-                                <td>{{ formatCurrency($category->remainingAmount) }}</td>
+                                <td class="text-right">
+                                    {{ formatCurrency($category->totalSpended) }}
+                                </td>
+                                <td class="text-right">
+                                    @if($category->budget)
+                                    {{ formatCurrency($category->remainingAmount) }}
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-bar" style="width: {{ $percentage }}%"></div>
@@ -99,7 +105,7 @@
                         <tr>
                             <th>Dátum</th>
                             <th>Názov</th>
-                            <th>Suma</th>
+                            <th class="text-right">Suma</th>
                             <th>Kategória</th>
                             <th>N.</th>
                         </tr>
@@ -109,7 +115,9 @@
                             <tr>
                                 <td>{{ $spend->date->format('d.m.Y') }}</td>
                                 <td>{{ $spend->title }}</td>
-                                <td style="text-align: right">{{ formatCurrency($spend->amount) }}</td>
+                                <td style="text-align: right">
+                                    {{ formatCurrency($spend->amount) }}
+                                </td>
                                 <td>{{ $spend->category->title }}</td>
                                 <td>{{ $spend->is_discretionary }}</td>
                             </tr>
