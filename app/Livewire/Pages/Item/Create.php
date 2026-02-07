@@ -5,7 +5,7 @@ namespace App\Livewire\Pages\Item;
 use App\Livewire\Forms\SpendForm;
 use App\Models\Category;
 use App\Models\Spend;
-use Livewire\Attributes\Validate;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class Create extends Component
@@ -30,6 +30,7 @@ class Create extends Component
         return $this->redirect('/');
     }
 
+    #[Title('Spends')]
     public function render()
     {
         return view('livewire.pages.item.create');

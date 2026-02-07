@@ -34,5 +34,4 @@ class SpendForm extends Form
             'is_discretionary',
         ]));
     }
-
 }
