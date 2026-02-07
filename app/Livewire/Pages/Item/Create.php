@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Pages\Item;
 
-use App\Models\Spend;
 use App\Models\Category;
+use App\Models\Spend;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -34,7 +34,7 @@ class Create extends Component
             'title',
             'amount',
             'category_id',
-            'date'
+            'date',
         ]));
 
         return $this->redirect('/');
