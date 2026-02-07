@@ -21,6 +21,8 @@ class Create extends Component
     #[Validate('required')]
     public $date = '';
 
+    public $is_discretionary = false;
+
     public function mount()
     {
         $this->date = now()->format('Y-m-d');
@@ -35,6 +37,7 @@ class Create extends Component
             'amount',
             'category_id',
             'date',
+            'is_discretionary',
         ]));
 
         return $this->redirect('/');
@@ -43,7 +46,7 @@ class Create extends Component
     public function render()
     {
         $items = Category::all();
-        $spends = Spend::query()->orderBy('date', 'desc')->get();
+        $spends = Spend::query()->orderBy('created_at', 'desc')->get();
 
         return view('livewire.pages.item.create', [
             'items' => $items,

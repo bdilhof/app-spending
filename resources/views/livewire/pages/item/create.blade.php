@@ -4,16 +4,6 @@
             <h5>Nový výdavok</h5>
             <form wire:submit="save" class="bg-light p-3 vstack gap-2">
                 <div>
-                    <label class="form-label">Dátum</label>
-                    <input type="date" wire:model="date" class="form-control">
-                    @error('date') <span class="error">{{ $message }}</span> @enderror
-                </div>
-                <div>
-                    <label class="form-label">Názov</label>
-                    <input type="text" wire:model="title" class="form-control">
-                    @error('title') <span class="error">{{ $message }}</span> @enderror
-                </div>
-                <div>
                     <label class="form-label">Suma</label>
                     <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" wire:model="amount">
                     @error('amount') <span class="error">{{ $message }}</span> @enderror
@@ -28,12 +18,28 @@
                     </select>
                     @error('category_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
+                <div>
+                    <label class="form-label">Názov</label>
+                    <input type="text" wire:model="title" class="form-control">
+                    @error('title') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                <div>
+                    <label class="form-label">Dátum</label>
+                    <input type="date" wire:model="date" class="form-control">
+                    @error('date') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" wire:model="is_discretionary" type="checkbox" value="1" id="is_discretionary">
+                    <label class="form-check-label" for="is_discretionary">
+                        Nerozumný výdavok
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-sm btn-success">
                     Uložiť
                 </button>
             </form>
         </div>
-        <div class="col-7">
+        <div class="col-6">
             <h5>Rozpočet</h5>
             <table class="table">
                 <thead>
@@ -77,7 +83,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-3">
+        <div class="col-4">
             <h5>Výdavky</h5>
             <table class="table table-striped table-sm">
                 <thead>
@@ -86,6 +92,7 @@
                         <th>Názov</th>
                         <th>Suma</th>
                         <th>Kategória</th>
+                        <th>N.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +102,7 @@
                         <td>{{ $spend->title }}</td>
                         <td style="text-align: right">{{ formatCurrency($spend->amount) }}</td>
                         <td>{{ $spend->category->title }}</td>
+                        <td>{{ $spend->is_discretionary }}</td>
                     </tr>
                 @endforeach
                 </tbody>
