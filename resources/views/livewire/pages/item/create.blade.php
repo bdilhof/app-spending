@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid p-4">
     <div class="row">
 
         <!-- Form section -->
         <div class="col-2">
-            <div class="bg-light p-3 vstack gap-4">
+            <div class="bg-light p-4 vstack gap-4">
                 <h5 class="text-primary">Nový výdavok</h5>
                 <form wire:submit="save" class="vstack gap-2">
                     <div>
@@ -44,10 +44,10 @@
 
         <!-- Budget table -->
         <div class="col-6">
-            <div class="bg-light p-3 vstack gap-4">
+            <div class="bg-light p-4 vstack gap-4">
                 <h5 class="text-primary">Rozpočet</h5>
                 <table class="table m-0">
-                    <thead>
+                    <thead class="table-primary">
                         <tr>
                             <th>Kategória</th>
                             <th>Rozpočet</th>
@@ -98,10 +98,10 @@
 
         <!-- Spends table -->
         <div class="col-4">
-            <div class="bg-light p-3 vstack gap-4">
+            <div class="bg-light p-4 vstack gap-4">
                 <h5 class="text-primary">Výdavky</h5>
-                <table class="table table-striped m-0">
-                    <thead>
+                <table class="table m-0">
+                    <thead class="table-primary">
                         <tr>
                             <th>Dátum</th>
                             <th>Názov</th>
