@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Item;
 
 use App\Models\Spend;
+use App\Models\Category;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -22,15 +23,24 @@ class Create extends Component
 
     public function save()
     {
-        $newSpend = Spend::make([]);
+        $this->validate();
 
-        dd($newSpend);
+        Spend::create($this->pull([
+            'title',
+            'amount',
+            'category_id',
+            'date'
+        ]));
 
-        dd($this->only(['title', 'amount']));
+        dd('Hotovo.');
     }
 
     public function render()
     {
-        return view('livewire.pages.item.create');
+        $items = Category::all();
+
+        return view('livewire.pages.item.create', [
+            'items' => $items,
+        ]);
     }
 }
