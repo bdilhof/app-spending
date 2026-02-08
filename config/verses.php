@@ -33,19 +33,19 @@ return [
         'verse' => 'Dobre poznaj stav svojich stád.',
         'reference' => 'Príslovia 27:23–24',
     ],
-    9 =>[
+    9 => [
         'verse' => 'Nie je dobré konať bez rozvahy.',
         'reference' => 'Príslovia 19:2',
     ],
-    10 =>[
+    10 => [
         'verse' => 'Nie je dobré konať bez rozvahy.',
         'reference' => 'Príslovia 19:2',
     ],
-    11 =>[
+    11 => [
         'verse' => 'Nie je dobré konať bez rozvahy.',
         'reference' => 'Príslovia 19:2',
     ],
-    12 =>[
+    12 => [
         'verse' => 'Nie je dobré konať bez rozvahy.',
         'reference' => 'Príslovia 19:2',
     ],
