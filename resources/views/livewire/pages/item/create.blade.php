@@ -8,12 +8,12 @@
                 <form wire:submit="save" class="vstack gap-2">
                     <div>
                         <label class="form-label">Suma</label>
-                        <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" wire:model="amount">
+                        <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" wire:model="form.amount">
                         @error('amount') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div>
                         <label class="form-label">Kategória</label>
-                        <select wire:model="category_id" class="form-control">
+                        <select wire:model="form.category_id" class="form-control">
                             <option>Select</option>
                             @foreach($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -23,16 +23,16 @@
                     </div>
                     <div>
                         <label class="form-label">Názov</label>
-                        <input type="text" wire:model="title" class="form-control">
+                        <input type="text" wire:model="form.title" class="form-control">
                         @error('title') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div>
                         <label class="form-label">Dátum</label>
-                        <input type="date" wire:model="date" class="form-control">
+                        <input type="date" wire:model="form.date" class="form-control">
                         @error('date') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" wire:model="is_discretionary" type="checkbox" value="1" id="is_discretionary">
+                        <input class="form-check-input" wire:model="form.is_discretionary" type="checkbox" id="is_discretionary">
                         <label class="form-check-label" for="is_discretionary">
                             Nerozumný výdavok
                         </label>
@@ -100,26 +100,30 @@
         <div class="col-4">
             <div class="bg-light p-4 vstack gap-4">
                 <h5 class="text-primary">Výdavky</h5>
-                <table class="table m-0">
+                <table class="table table-hover m-0">
                     <thead class="table-primary">
                         <tr>
                             <th>Dátum</th>
+                            <th></th>
                             <th>Názov</th>
-                            <th class="text-right">Suma</th>
                             <th>Kategória</th>
-                            <th>N.</th>
+                            <th class="text-right">Suma</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($spends as $spend)
                             <tr>
                                 <td>{{ $spend->date->format('d.m.Y') }}</td>
+                                <td>
+                                    @if($spend->is_discretionary)
+                                        <span>!</span>
+                                    @endif
+                                </td>
                                 <td>{{ $spend->title }}</td>
+                                <td>{{ $spend->category->title }}</td>
                                 <td style="text-align: right">
                                     {{ formatCurrency($spend->amount) }}
                                 </td>
-                                <td>{{ $spend->category->title }}</td>
-                                <td>{{ $spend->is_discretionary }}</td>
                             </tr>
                         @endforeach
                     </tbody>
