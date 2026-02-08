@@ -2,8 +2,8 @@
     <div class="row">
 
         <!-- Form section -->
-        <div class="col-2">
-            <div class="bg-light p-4 vstack gap-4">
+        <div class="col-lg-2">
+            <div class="bg-light p-4 vstack gap-4 mb-4">
                 <h5 class="text-primary">Nový výdavok</h5>
                 <form wire:submit="save" class="vstack gap-2">
                     <div>
@@ -43,16 +43,16 @@
         </div>
 
         <!-- Budget table -->
-        <div class="col-6">
-            <div class="bg-light p-4 vstack gap-4">
+        <div class="col-lg-6">
+            <div class="bg-light p-4 vstack gap-4 mb-4">
                 <h5 class="text-primary">Rozpočet</h5>
-                <table class="table m-0">
+                <table class="table align-middle m-0">
                     <thead class="table-primary">
                         <tr>
                             <th>Kategória</th>
                             <th>Rozpočet</th>
-                            <th class="text-right">Minuté</th>
-                            <th class="text-right">Ostáva</th>
+                            <th class="text-right">Čerpané</th>
+                            <th class="text-right">Zostatok</th>
                             <th style="width: 300px"></th>
                         </tr>
                     </thead>
@@ -69,23 +69,23 @@
                             @endphp
                             <tr>
                                 <td>{{ $category->title }}</td>
-                                <td class="{{ $category->budget ? '' : 'text-warning' }}">
+                                <td class="text-nowrap {{ $category->budget ? '' : 'text-warning' }}">
                                     @if ($category->budget)
                                         {{ formatCurrency($category->budget) }}
                                     @else
                                         <span class="text-muted">(nie je nastavený)</span>
                                     @endif
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right text-nowrap">
                                     {{ formatCurrency($category->totalSpended) }}
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right text-nowrap">
                                     @if($category->budget)
                                     {{ formatCurrency($category->remainingAmount) }}
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 10px">
                                         <div class="progress-bar" style="width: {{ $percentage }}%"></div>
                                     </div>
                                 </td>
@@ -97,7 +97,7 @@
         </div>
 
         <!-- Spends table -->
-        <div class="col-4">
+        <div class="col-lg-4">
             <div class="bg-light p-4 vstack gap-4">
                 <h5 class="text-primary">Výdavky</h5>
                 <table class="table table-hover m-0">
@@ -113,7 +113,9 @@
                     <tbody>
                         @foreach($spends as $spend)
                             <tr>
-                                <td>{{ $spend->date->format('d.m.Y') }}</td>
+                                <td>
+                                    {{ $spend->date->format('d.m.Y') }}
+                                </td>
                                 <td>
                                     @if($spend->is_discretionary)
                                         <span>!</span>
@@ -121,7 +123,7 @@
                                 </td>
                                 <td>{{ $spend->title }}</td>
                                 <td>{{ $spend->category->title }}</td>
-                                <td style="text-align: right">
+                                <td class="text-right text-nowrap">
                                     {{ formatCurrency($spend->amount) }}
                                 </td>
                             </tr>
