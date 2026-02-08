@@ -27,12 +27,13 @@ class Create extends Component
     {
         $this->form->date = now()->toDateString();
         $this->loadData();
-        $this->verse = $this->getBibleVerse();
+        $this->getBibleVerse();
     }
 
     public function updatedMonth(): void
     {
         $this->loadData();
+        $this->getBibleVerse();
     }
 
     private function loadData(): void
@@ -63,11 +64,12 @@ class Create extends Component
         ];
     }
 
-    private function getBibleVerse(): array
+    private function getBibleVerse(): void
     {
         $verses = config('verses');
+        $date = Carbon::createFromFormat('Y-m', $this->month);
 
-        return $verses[random_int(0, count($verses) - 1)];
+        $this->verse = $verses[intval($date->format('m'))];
     }
 
     public function save()

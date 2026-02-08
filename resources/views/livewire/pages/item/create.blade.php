@@ -1,23 +1,22 @@
 <div class="container-fluid p-4">
 
-    <div class="w-auto" style="width: 140px">
-        <select wire:model.live="month" class="form-control mb-4">
-            <option value="2026-01">Január</option>
-            <option value="2026-02">Február</option>
-        </select>
-    </div>
-
     <div class="row mb-4">
         <div class="col">
             <div class="bg-light p-4">
-                <figure class="text-center mb-0">
-                    <blockquote class="blockquote m-0">
-                        <p>{{ $verse['verse'] }}</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer m-0">
-                        <cite>{{ $verse['reference'] }}</cite>
-                    </figcaption>
-                </figure>
+                <div class="d-flex justify-content-between align-items-center">
+                    <figure class="mb-0">
+                        <blockquote class="blockquote m-0">
+                            <p>{{ $verse['verse'] }}</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer m-0">
+                            <cite>{{ $verse['reference'] }}</cite>
+                        </figcaption>
+                    </figure>
+                    <select wire:model.live="month" class="form-control w-auto">
+                        <option value="2026-01">Január 2026</option>
+                        <option value="2026-02">Február 2026</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +54,7 @@
             <div class="bg-light p-4 mb-4">
                 <div class="vstack gap-3">
                     <h5 class="text-primary">Rozpočet</h5>
-                    <table class="table align-middle m-0">
+                    <table class="table table-hover align-middle m-0">
                         <thead class="table-primary">
                             <tr>
                                 <th>Kategória</th>
@@ -83,8 +82,8 @@
                                     <td>{{ $budget ? formatCurrency($budget) : '—' }}</td>
                                     <td>{{ formatCurrency($spend) }}</td>
                                     <td>{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
-                                    <td>
-                                        <div class="progress" style="height: 8px; width: 200px">
+                                    <td style="width: 250px">
+                                        <div class="progress" style="height: 10px; width: 100%">
                                             <div class="progress-bar" style="width: {{ $percentage }}%"></div>
                                         </div>
                                     </td>
