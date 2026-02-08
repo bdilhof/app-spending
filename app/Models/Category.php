@@ -14,26 +14,23 @@ class Category extends Model
         'budget',
     ];
 
-    /**
-     * Attributes
-     */
-    public function getTotalSpendedAttribute()
-    {
-        return $this->spends->sum('amount');
-    }
+    protected $casts = [
+        'budget' => 'decimal:2',
+    ];
 
-    public function getRemainingAmountAttribute()
-    {
-        $remains = $this->budget - $this->totalSpended;
+    protected $appends = [
+        'remaining_amount',
+    ];
 
-        return $remains;
-    }
-
-    /**
-     * Relationships
-     */
     public function spends(): HasMany
     {
         return $this->hasMany(Spend::class, 'category_id');
+    }
+
+    public function getRemainingAmountAttribute(): float
+    {
+        $spent = $this->total_spended ?? 0;
+
+        return max(0, (float) $this->budget - (float) $spent);
     }
 }

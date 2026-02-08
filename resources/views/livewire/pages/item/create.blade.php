@@ -1,91 +1,85 @@
 <div class="container-fluid p-4">
-    <div class="row">
 
-        <!-- Form section -->
+    <div class="w-auto" style="width: 140px">
+        <select wire:model.live="month" class="form-control mb-4">
+            <option value="2026-01">Január</option>
+            <option value="2026-02">Február</option>
+        </select>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="bg-light p-4">
+                <figure class="text-center mb-0">
+                    <blockquote class="blockquote m-0">
+                        <p>{{ $verse['verse'] }}</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer m-0">
+                        <cite>{{ $verse['reference'] }}</cite>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- FORM -->
         <div class="col-lg-2">
-            <div class="bg-light p-4 vstack gap-4 mb-4">
+            <div class="bg-light p-4 mb-4">
                 <h5 class="text-primary">Nový výdavok</h5>
+
                 <form wire:submit="save" class="vstack gap-2">
-                    <div>
-                        <label class="form-label" for="amount">Suma</label>
-                        <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" id="amount" wire:model="form.amount">
-                        @error('amount') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <div>
-                        <label class="form-label" for="category_id">Kategória</label>
-                        <select wire:model="form.category_id" id="category_id" class="form-control">
-                            <option>Select</option>
-                            @foreach($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
-                        </select>
-                        @error('category_id') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <div>
-                        <label class="form-label" for="title">Názov</label>
-                        <input type="text" wire:model="form.title" id="title" class="form-control">
-                        @error('title') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <div>
-                        <label class="form-label" for="date">Dátum</label>
-                        <input type="date" wire:model="form.date" id="date" class="form-control">
-                        @error('date') <span class="error">{{ $message }}</span> @enderror
-                    </div>
+                    <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
+
+                    <select wire:model="form.category_id" class="form-control">
+                        <option value="">Kategória</option>
+                        @foreach($items as $item)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                        @endforeach
+                    </select>
+
+                    <input type="text" wire:model="form.title" class="form-control" placeholder="Názov">
+                    <input type="date" wire:model="form.date" class="form-control">
+
                     <div class="form-check">
-                        <input class="form-check-input" wire:model="form.is_discretionary" type="checkbox" id="is_discretionary">
-                        <label class="form-check-label" for="is_discretionary">
-                            Nerozumný výdavok
-                        </label>
+                        <input class="form-check-input" wire:model="form.is_discretionary" type="checkbox">
+                        <label class="form-check-label">Márnosť</label>
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary mt-3">Uložiť</button>
+
+                    <button class="btn btn-primary btn-sm mt-2">Uložiť</button>
                 </form>
             </div>
         </div>
 
-        <!-- Budget table -->
+        <!-- ROZPOČET -->
         <div class="col-lg-6">
-            <div class="bg-light p-4 vstack gap-4 mb-4">
+            <div class="bg-light p-4 mb-4">
                 <h5 class="text-primary">Rozpočet</h5>
-                <table class="table align-middle m-0">
+
+                <table class="table align-middle">
                     <thead class="table-primary">
                         <tr>
                             <th>Kategória</th>
                             <th>Rozpočet</th>
-                            <th class="text-right">Čerpané</th>
-                            <th class="text-right">Zostatok</th>
-                            <th style="width: 300px"></th>
+                            <th>Čerpané</th>
+                            <th>Zostatok</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $category)
                             @php
-                                if ($category->budget) {
-                                    $budget = (float) $category->budget;
-                                    $spend = $category->totalSpended;
-                                    $percentage = ($spend / $budget) * 100;
-                                } else {
-                                    $percentage = 0;
-                                }
+                                $budget = (float) $category->budget;
+                                $spend = (float) $category->total_spended;
+                                $percentage = $budget > 0 ? min(100, ($spend / $budget) * 100) : 0;
                             @endphp
                             <tr>
                                 <td>{{ $category->title }}</td>
-                                <td class="text-nowrap {{ $category->budget ? '' : 'text-warning' }}">
-                                    @if ($category->budget)
-                                        {{ formatCurrency($category->budget) }}
-                                    @else
-                                        <span class="text-muted">(nie je nastavený)</span>
-                                    @endif
-                                </td>
-                                <td class="text-right text-nowrap">
-                                    {{ formatCurrency($category->totalSpended) }}
-                                </td>
-                                <td class="text-right text-nowrap">
-                                    @if($category->budget)
-                                    {{ formatCurrency($category->remainingAmount) }}
-                                    @endif
-                                </td>
+                                <td>{{ $budget ? formatCurrency($budget) : '—' }}</td>
+                                <td>{{ formatCurrency($spend) }}</td>
+                                <td>{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                 <td>
-                                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 10px">
+                                    <div class="progress" style="height: 8px; width: 200px">
                                         <div class="progress-bar" style="width: {{ $percentage }}%"></div>
                                     </div>
                                 </td>
@@ -96,36 +90,29 @@
             </div>
         </div>
 
-        <!-- Spends table -->
+        <!-- VÝDAVKY -->
         <div class="col-lg-4">
-            <div class="bg-light p-4 vstack gap-4">
+            <div class="bg-light p-4">
                 <h5 class="text-primary">Výdavky</h5>
-                <table class="table table-hover m-0">
+
+                <table class="table table-hover">
                     <thead class="table-primary">
-                        <tr>
-                            <th>Dátum</th>
+                        <tr class="border-b text-left text-sm text-gray-600">
+                            <th class="">Dátum</th>
                             <th></th>
-                            <th>Názov</th>
-                            <th>Kategória</th>
+                            <th class="">Názov</th>
+                            <th class="">Kategória</th>
                             <th class="text-right">Suma</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($spends as $spend)
                             <tr>
-                                <td>
-                                    {{ $spend->date->format('d.m.Y') }}
-                                </td>
-                                <td>
-                                    @if($spend->is_discretionary)
-                                        <span>!</span>
-                                    @endif
-                                </td>
+                                <td>{{ $spend->date->format('d.m.Y') }}</td>
+                                <td>{{ $spend->is_discretionary ? '!' : '' }}</td>
                                 <td>{{ $spend->title }}</td>
                                 <td>{{ $spend->category->title }}</td>
-                                <td class="text-right text-nowrap">
-                                    {{ formatCurrency($spend->amount) }}
-                                </td>
+                                <td class="text-end">{{ formatCurrency($spend->amount) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

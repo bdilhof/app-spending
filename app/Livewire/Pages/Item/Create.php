@@ -7,27 +7,70 @@ use App\Models\Category;
 use App\Models\Spend;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class Create extends Component
 {
     public SpendForm $form;
 
-    public $items = null;
+    public $items;
+    public $spends;
+    public $verse;
 
-    public $spends = null;
+    public string $month = '2026-02';
 
-    public function mount()
+    public function mount(): void
     {
-        $this->date = now()->format('Y-m-d');
-        $this->items = Category::all();
-        $this->spends = Spend::query()->orderBy('created_at', 'desc')->get();
+        $this->form->date = now()->toDateString();
+        $this->loadData();
+        $this->verse = $this->getBibleVerse();
+    }
+
+    public function updatedMonth(): void
+    {
+        $this->loadData();
+    }
+
+    private function loadData(): void
+    {
+        [$from, $to] = $this->monthRange();
+
+        $this->items = Category::query()
+            ->withSum([
+                'spends as total_spended' => function ($query) use ($from, $to) {
+                    $query->whereBetween('date', [$from, $to]);
+                }
+            ], 'amount')
+            ->get();
+
+        $this->spends = Spend::query()
+            ->whereBetween('date', [$from, $to])
+            ->orderByDesc('created_at')
+            ->get();
+    }
+
+    private function monthRange(): array
+    {
+        $date = Carbon::createFromFormat('Y-m', $this->month);
+
+        return [
+            $date->copy()->startOfMonth()->toDateString(),
+            $date->copy()->endOfMonth()->toDateString(),
+        ];
+    }
+
+    private function getBibleVerse(): array
+    {
+        $verses = config('verses');
+
+        return $verses[random_int(0, count($verses) - 1)];
     }
 
     public function save()
     {
         $this->form->store();
 
-        return $this->redirect('/');
+        return redirect('/');
     }
 
     #[Title('Spends')]
