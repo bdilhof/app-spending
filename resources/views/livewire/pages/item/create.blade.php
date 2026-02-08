@@ -7,13 +7,13 @@
                 <h5 class="text-primary">Nový výdavok</h5>
                 <form wire:submit="save" class="vstack gap-2">
                     <div>
-                        <label class="form-label">Suma</label>
-                        <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" wire:model="form.amount">
+                        <label class="form-label" for="amount">Suma</label>
+                        <input type="number" class="form-control" inputmode="decimal" step="0.01" min="0" placeholder="0.00" id="amount" wire:model="form.amount">
                         @error('amount') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label class="form-label">Kategória</label>
-                        <select wire:model="form.category_id" class="form-control">
+                        <label class="form-label" for="category_id">Kategória</label>
+                        <select wire:model="form.category_id" id="category_id" class="form-control">
                             <option>Select</option>
                             @foreach($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -22,13 +22,13 @@
                         @error('category_id') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label class="form-label">Názov</label>
-                        <input type="text" wire:model="form.title" class="form-control">
+                        <label class="form-label" for="title">Názov</label>
+                        <input type="text" wire:model="form.title" id="title" class="form-control">
                         @error('title') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label class="form-label">Dátum</label>
-                        <input type="date" wire:model="form.date" class="form-control">
+                        <label class="form-label" for="date">Dátum</label>
+                        <input type="date" wire:model="form.date" id="date" class="form-control">
                         @error('date') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-check">
