@@ -6,6 +6,7 @@ use App\Livewire\Forms\SpendForm;
 use App\Models\Category;
 use App\Models\Spend;
 use Carbon\Carbon;
+use Livewire\Attributes\Session;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class Create extends Component
 
     public $verse;
 
+    #[Session]
     public string $month = '2026-02';
 
     public function mount(): void
