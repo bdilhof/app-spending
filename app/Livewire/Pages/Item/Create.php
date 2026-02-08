@@ -5,16 +5,18 @@ namespace App\Livewire\Pages\Item;
 use App\Livewire\Forms\SpendForm;
 use App\Models\Category;
 use App\Models\Spend;
+use Carbon\Carbon;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Carbon\Carbon;
 
 class Create extends Component
 {
     public SpendForm $form;
 
     public $items;
+
     public $spends;
+
     public $verse;
 
     public string $month = '2026-02';
@@ -39,7 +41,7 @@ class Create extends Component
             ->withSum([
                 'spends as total_spended' => function ($query) use ($from, $to) {
                     $query->whereBetween('date', [$from, $to]);
-                }
+                },
             ], 'amount')
             ->get();
 
