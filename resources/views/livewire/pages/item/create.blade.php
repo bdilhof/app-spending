@@ -27,7 +27,7 @@
         <div class="col-lg-5">
             <div class="bg-white p-4 mb-4 d-none d-lg-block">
                 <div class="vstack gap-3">
-                    <h4 class="text-primary">Rozpočet</h4>
+                    <h4 class="text-primary">Plán</h4>
                     <table class="table table-hover align-middle m-0">
                         <thead class="">
                             <tr>
@@ -69,7 +69,7 @@
         <div class="col-lg-4">
             <div class="bg-white p-4">
                 <div class="vstack gap-3">
-                    <h4 class="text-primary">Výdavky</h4>
+                    <h4 class="text-primary">Skutočné výdavky</h4>
                     <table class="table align-middle table-hover m-0">
                         <thead class="">
                             <tr class="border-b text-left text-sm text-gray-600">
