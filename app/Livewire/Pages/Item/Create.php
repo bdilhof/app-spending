@@ -41,6 +41,7 @@ class Create extends Component
         [$from, $to] = $this->monthRange();
 
         $this->items = Category::query()
+            ->orderBy('title', 'asc')
             ->withSum([
                 'spends as total_spended' => function ($query) use ($from, $to) {
                     $query->whereBetween('date', [$from, $to]);
