@@ -1,8 +1,8 @@
 <div class="container-fluid p-4">
 
-    <div class="row mb-4">
+    <div class="row">
         <div class="col">
-            <div class="bg-light p-4">
+            <div class="d-none d-lg-block bg-light mb-4 p-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <figure class="mb-0">
                         <blockquote class="blockquote m-0">
@@ -22,6 +22,7 @@
     </div>
 
     <div class="row">
+
         <!-- FORM -->
         <div class="col-lg-2">
             <div class="bg-light p-4 mb-4">
@@ -51,7 +52,7 @@
 
         <!-- ROZPOČET -->
         <div class="col-lg-6">
-            <div class="bg-light p-4 mb-4">
+            <div class="bg-light p-4 mb-4 d-none d-lg-block">
                 <div class="vstack gap-3">
                     <h5 class="text-primary">Rozpočet</h5>
                     <table class="table table-hover align-middle m-0">
@@ -117,7 +118,7 @@
                                     <td>{{ $spend->is_discretionary ? '!' : '' }}</td>
                                     <td>{{ $spend->title }}</td>
                                     <td>{{ $spend->category->title }}</td>
-                                    <td class="text-end">{{ formatCurrency($spend->amount) }}</td>
+                                    <td class="text-end text-nowrap">{{ formatCurrency($spend->amount) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
