@@ -85,7 +85,7 @@
                                     <td>{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                     <td style="width: 250px">
                                         <div class="progress" style="height: 10px; width: 100%">
-                                            <div class="progress-bar" style="width: {{ $percentage }}%"></div>
+                                            <div class="progress-bar {{ $percentage <= 50 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
                                         </div>
                                     </td>
                                 </tr>
