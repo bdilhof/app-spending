@@ -12,7 +12,7 @@
                             <cite>{{ $verse['reference'] }}</cite>
                         </figcaption>
                     </figure>
-                    <select wire:model.live="month" class="form-control w-auto">
+                    <select wire:model.live="month" class="form-select w-auto">
                         <option value="2026-01">Január 2026</option>
                         <option value="2026-02">Február 2026</option>
                     </select>
@@ -104,7 +104,7 @@
                     <form wire:submit="save" class="vstack gap-2" id="brekeke">
                         <input type="date" wire:model="form.date" class="form-control">
                         <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
-                        <select wire:model="form.category_id" class="form-control">
+                        <select wire:model="form.category_id" class="form-select">
                             <option value="">Kategória</option>
                             @foreach($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
