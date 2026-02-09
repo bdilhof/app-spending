@@ -87,7 +87,9 @@
                                         <br>
                                         <span class="text-muted text-sm">{{ $spend->category->title }}</span>
                                     </td>
-                                    <td class="text-end text-nowrap">{{ formatCurrency($spend->amount) }}</td>
+                                    <td class="text-end text-nowrap">
+                                        {{ formatCurrency($spend->amount) }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
