@@ -51,8 +51,13 @@ class Create extends Component
 
         $this->spends = Spend::query()
             ->whereBetween('date', [$from, $to])
-            ->orderByDesc('created_at')
-            ->get();
+            ->orderByDesc('date')
+            ->get()
+            ->mapToGroups(function ($spend) {
+                return [
+                    $spend->date->format('d.m.Y') => $spend,
+                ];
+            });
     }
 
     private function monthRange(): array

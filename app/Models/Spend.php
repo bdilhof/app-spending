@@ -16,6 +16,10 @@ class Spend extends Model
         'is_discretionary',
     ];
 
+    protected $dates = [
+        'date',
+    ];
+
     protected $casts = [
         'date' => 'date',
         'is_discretionary' => 'boolean',

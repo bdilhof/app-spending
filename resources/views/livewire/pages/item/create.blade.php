@@ -26,8 +26,8 @@
         <!-- ROZPOČET -->
         <div class="col-lg-5">
             <div class="bg-white p-4 mb-4 d-none d-lg-block">
-                <div class="vstack gap-3">
-                    <h4 class="text-primary">Plán</h4>
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Plán</h4>
                     <table class="table table-hover align-middle m-0">
                         <thead class="">
                             <tr>
@@ -68,31 +68,30 @@
         <!-- VÝDAVKY -->
         <div class="col-lg-4">
             <div class="bg-white p-4">
-                <div class="vstack gap-3">
-                    <h4 class="text-primary">Skutočné výdavky</h4>
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Skutočné výdavky</h4>
                     <table class="table align-middle table-hover m-0">
-                        <thead class="">
-                            <tr class="border-b text-left text-sm text-gray-600">
-                                <th class="">Dátum</th>
-                                <th class="">Názov</th>
-                                <th class="text-right">Suma</th
+                        @foreach($spends as $date => $items)
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{ $date }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($spends as $spend)
-                                <tr>
-                                    <td>{{ $spend->date->format('d.m.Y') }}</td>
-                                    <td>
-                                        {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
-                                        <br>
-                                        <span class="text-muted text-sm">{{ $spend->category->title }}</span>
-                                    </td>
-                                    <td class="text-end text-nowrap">
-                                        {{ formatCurrency($spend->amount) }}
-                                    </td>
-                                </tr>
+                            @foreach($items as $spend)
+                            <tr>
+                                <td>
+                                    {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
+                                    <br>
+                                    <span class="text-muted text-sm">{{ $spend->category->title }}</span>
+                                </td>
+                                <td class="text-end text-nowrap">
+                                    {{ formatCurrency($spend->amount) }}
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
+                        @endforeach
                     </table>
                 </div>
             </div>
@@ -101,8 +100,8 @@
         <!-- FORM -->
         <div class="col-lg-3">
             <div class="bg-white p-4 mb-4">
-                <div class="vstack gap-3">
-                    <h4 class="text-primary">Nový výdavok</h4>
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Nový výdavok</h4>
                     <form wire:submit="save" class="vstack gap-2" id="brekeke">
                         <input type="date" wire:model="form.date" class="form-control">
                         <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
@@ -113,12 +112,12 @@
                             @endforeach
                         </select>
                         <input type="text" wire:model="form.title" class="form-control" placeholder="Názov">
-                        <div class="form-check">
+                        <div class="form-check m-0">
                             <input class="form-check-input" wire:model="form.is_discretionary" type="checkbox">
                             <label class="form-check-label">Márnosť</label>
                         </div>
                     </form>
-                    <button type="submit" class="btn btn-primary btn-sm mt-2" form="brekeke">
+                    <button type="submit" class="btn btn-success btn-sm" form="brekeke">
                         Uložiť
                     </button>
                 </div>
