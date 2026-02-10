@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('{{ table }}', function (Blueprint $table) {
-            //
+        Schema::table('app_spend_categories', function (Blueprint $table) {
+            $table->string('icon')->after('title')->nullable();
         });
     }
 };

@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS `app_spend_categories`;
 CREATE TABLE `app_spend_categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `budget` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE `app_spend_categories` (
 
 LOCK TABLES `app_spend_categories` WRITE;
 /*!40000 ALTER TABLE `app_spend_categories` DISABLE KEYS */;
-INSERT INTO `app_spend_categories` VALUES (1,'Dlhy',NULL,'2026-02-01 21:13:42','2026-02-01 21:13:42'),(2,'Potraviny',330.00,'2026-02-01 21:13:46','2026-02-01 21:13:46'),(3,'Bývanie',630.00,'2026-02-01 21:13:52','2026-02-01 21:13:52'),(4,'Lekáreň',15.00,'2026-02-01 21:13:54','2026-02-01 21:14:00'),(5,'Mimi',65.00,'2026-02-01 21:14:11','2026-02-01 21:14:11'),(6,'Oblečenie',NULL,'2026-02-01 21:14:15','2026-02-01 21:14:15'),(7,'Online',25.00,'2026-02-01 21:14:19','2026-02-01 21:14:19'),(8,'Ostatné',NULL,'2026-02-01 21:14:23','2026-02-01 21:14:23'),(9,'Pochutiny',NULL,'2026-02-01 21:14:27','2026-02-01 21:14:27'),(11,'Telefón',NULL,'2026-02-01 21:14:41','2026-02-01 21:14:41'),(13,'Drogéria',30.00,'2026-02-07 01:12:20','2026-02-07 01:12:20'),(14,'Auto',100.00,'2026-02-08 00:56:38','2026-02-08 00:56:38');
+INSERT INTO `app_spend_categories` VALUES (1,'Dlhy','credit-card',NULL,'2026-02-01 21:13:42','2026-02-01 21:13:42'),(2,'Potraviny','fork-knife',330.00,'2026-02-01 21:13:46','2026-02-01 21:13:46'),(3,'Bývanie','house',630.00,'2026-02-01 21:13:52','2026-02-01 21:13:52'),(4,'Lekáreň','capsule-pill',15.00,'2026-02-01 21:13:54','2026-02-01 21:14:00'),(5,'Mimi','heart-fill',65.00,'2026-02-01 21:14:11','2026-02-01 21:14:11'),(6,'Oblečenie','universal-access',NULL,'2026-02-01 21:14:15','2026-02-01 21:14:15'),(7,'Online','globe',25.00,'2026-02-01 21:14:19','2026-02-01 21:14:19'),(8,'Ostatné','three-dots',NULL,'2026-02-01 21:14:23','2026-02-01 21:14:23'),(9,'Pochutiny','cup-hot',NULL,'2026-02-01 21:14:27','2026-02-01 21:14:27'),(11,'Telefón','telephone',NULL,'2026-02-01 21:14:41','2026-02-01 21:14:41'),(13,'Drogéria','droplet',30.00,'2026-02-07 01:12:20','2026-02-07 01:12:20'),(14,'Auto','car-front-fill',100.00,'2026-02-08 00:56:38','2026-02-08 00:56:38');
 /*!40000 ALTER TABLE `app_spend_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `app_spends`;
@@ -224,12 +225,12 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_01_15_235539_set_up_tickets_module',1),(5,'2026_01_15_235910_set_up_manuals_module',1),(6,'2026_01_15_235937_set_up_outbounds_module',1),(8,'2026_02_01_210734_create_app_spend_categories_table',2),(11,'2026_02_01_210728_create_app_spends_table',3),(12,'2026_02_01_213603_create_notifications_table',4),(13,'2026_02_01_213612_create_imports_table',4),(14,'2026_02_01_213613_create_exports_table',4),(15,'2026_02_01_213614_create_failed_import_rows_table',4),(16,'2026_02_07_114152_add_budget_column_to_app_spends_categories_table',5),(17,'2026_02_07_225232_update_app_spends_table',6);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_01_15_235539_set_up_tickets_module',1),(5,'2026_01_15_235910_set_up_manuals_module',1),(6,'2026_01_15_235937_set_up_outbounds_module',1),(8,'2026_02_01_210734_create_app_spend_categories_table',2),(11,'2026_02_01_210728_create_app_spends_table',3),(12,'2026_02_01_213603_create_notifications_table',4),(13,'2026_02_01_213612_create_imports_table',4),(14,'2026_02_01_213613_create_exports_table',4),(15,'2026_02_01_213614_create_failed_import_rows_table',4),(16,'2026_02_07_114152_add_budget_column_to_app_spends_categories_table',5),(17,'2026_02_07_225232_update_app_spends_table',6),(18,'2026_02_10_233640_add_icon_column_to_spend_categories_table',7);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `notifications`;
@@ -287,7 +288,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('A6DwVw7IcyWYZULKoUiAm5cVP2Si43yCaQQTDK1v',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVGxVMWV1R0d0TzJQSFpjdjg5S1pzTXRlVmxxTktxREc3TGZJYU9kaiI7czoxMjoibHcyMzEyOTc4NjQwIjtzOjc6IjIwMjYtMDIiO3M6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1770766018),('XCwPOuVLCtlp5AOL2aUySy7hwfXTnkQzmR5igB9p',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiN3Rtam54UkNLRDljcWlhWVFwc2V6RVNUV1pxZWMyYXVPWkZmV01PSyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2FkbWluL3NwZW5kcyI7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMzOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYWRtaW4vbG9naW4iO3M6NToicm91dGUiO3M6MjU6ImZpbGFtZW50LmFkbWluLmF1dGgubG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1770764748),('xRIojB1aDbjiR7gqzunZM5UiCNgyCMlywdobFDH7',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoieGZBMzZpUHhld05YcVhLYTdlell2cU95YU9MVE1IZVQzUkZhTzV1VCI7czoxMjoibHcyMzEyOTc4NjQwIjtzOjc6IjIwMjYtMDIiO3M6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1770710250),('Zfrk1LRr1tQNF2wuqo3ixl1oZEYENWeSwmYcwWMI',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYW1KdVpOT1A2ZjRhaG5LNG9wWnU0M3NEZFByYkpEcEZOaGlJZDNKTCI7czoxMjoibHcyMzEyOTc4NjQwIjtzOjc6IjIwMjYtMDIiO3M6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1770686604);
+INSERT INTO `sessions` VALUES ('A6DwVw7IcyWYZULKoUiAm5cVP2Si43yCaQQTDK1v',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVGxVMWV1R0d0TzJQSFpjdjg5S1pzTXRlVmxxTktxREc3TGZJYU9kaiI7czoxMjoibHcyMzEyOTc4NjQwIjtzOjc6IjIwMjYtMDIiO3M6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1770767463),('XCwPOuVLCtlp5AOL2aUySy7hwfXTnkQzmR5igB9p',NULL,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiN3Rtam54UkNLRDljcWlhWVFwc2V6RVNUV1pxZWMyYXVPWkZmV01PSyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2FkbWluL3NwZW5kcyI7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMzOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYWRtaW4vbG9naW4iO3M6NToicm91dGUiO3M6MjU6ImZpbGFtZW50LmFkbWluLmF1dGgubG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1770764748);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `users`;

@@ -12,10 +12,15 @@
                             <cite>{{ $verse['reference'] }}</cite>
                         </figcaption>
                     </figure>
-                    <select wire:model.live="month" class="form-select w-auto">
-                        <option value="2026-01">Január 2026</option>
-                        <option value="2026-02">Február 2026</option>
-                    </select>
+                    <div class="input-group w-auto">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-calendar-month"></i>
+                        </span>
+                        <select wire:model.live="month" class="form-select">
+                            <option value="2026-01">Január 2026</option>
+                            <option value="2026-02">Február 2026</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,7 +36,7 @@
                     <table class="table table-hover align-middle m-0">
                         <thead class="">
                             <tr>
-                                <th>Kategória</th>
+                                <th style="width: 30px" colspan="2">Kategória</th>
                                 <th class="text-right">Zostatok</th>
                                 <th></th>
                             </tr>
@@ -50,6 +55,9 @@
                                 }
                                 @endphp
                                 <tr>
+                                    <td class="text-muted" style="width: 25px">
+                                        <i class="bi bi-{{ $category->icon }}"></i>
+                                    </td>
                                     <td title="Minuté {{ formatCurrency($spend) }} z mesačného rozpočtu {{ $budget ? formatCurrency($budget) : '—' }}">{{ $category->title }}</td>
                                     <td class="text-right">{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                     <td style="width: 350px">
@@ -74,7 +82,8 @@
                         @foreach($spends as $date => $itemsByDate)
                         <thead>
                             <tr>
-                                <th colspan="2">{{ $date }}</th>
+                                <th>{{ $date }}</th>
+                                <th class="text-right">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
                             </tr>
                         </thead>
                         <tbody>
