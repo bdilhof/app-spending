@@ -71,14 +71,14 @@
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Skutočné výdavky</h4>
                     <table class="table align-middle table-hover m-0">
-                        @foreach($spends as $date => $items)
+                        @foreach($spends as $date => $itemsByDate)
                         <thead>
                             <tr>
                                 <th colspan="2">{{ $date }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($items as $spend)
+                            @foreach($itemsByDate as $spend)
                             <tr>
                                 <td>
                                     {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
@@ -113,8 +113,8 @@
                         </select>
                         <input type="text" wire:model="form.title" class="form-control" placeholder="Názov">
                         <div class="form-check m-0">
-                            <input class="form-check-input" wire:model="form.is_discretionary" type="checkbox">
-                            <label class="form-check-label">Márnosť</label>
+                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox">
+                            <label class="form-check-label" for="is_discretionary">Márnosť</label>
                         </div>
                     </form>
                     <button type="submit" class="btn btn-success btn-sm" form="brekeke">
