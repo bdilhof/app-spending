@@ -20,6 +20,8 @@ class Create extends Component
 
     public $verse;
 
+    public bool $is_discretionary = false;
+
     #[Session]
     public string $month = '2026-02';
 
@@ -28,6 +30,11 @@ class Create extends Component
         $this->form->date = now()->toDateString();
         $this->loadData();
         $this->getBibleVerse();
+    }
+
+    public function updatedIsDiscretionary()
+    {
+        $this->loadData();
     }
 
     public function updatedMonth(): void
@@ -51,6 +58,10 @@ class Create extends Component
 
         $this->spends = Spend::query()
             ->whereBetween('date', [$from, $to])
+            ->when($this->is_discretionary, function ($query) {
+                $query->where('is_discretionary', $this->is_discretionary);
+            })
+            ->where('is_discretionary', $this->is_discretionary)
             ->orderByDesc('date')
             ->get()
             ->mapToGroups(function ($spend) {

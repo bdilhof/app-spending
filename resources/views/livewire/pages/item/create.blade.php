@@ -57,7 +57,16 @@
                                     <td class="text-muted" style="width: 25px">
                                         <i class="bi bi-{{ $category->icon }}"></i>
                                     </td>
-                                    <td title="Minuté {{ formatCurrency($spend) }} z mesačného rozpočtu {{ $budget ? formatCurrency($budget) : '—' }}">{{ $category->title }}</td>
+                                    <td>
+                                        <span
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            data-bs-custom-class="custom-tooltip"
+                                            data-bs-html="true"
+                                            data-bs-title="Minuté <b>{{ formatCurrency($spend) }}</b> z mesačného rozpočtu <b>{{ $budget ? formatCurrency($budget) : '—' }}</b>">
+                                            {{ $category->title }}
+                                        </span>
+                                    </td>
                                     <td class="text-right">{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                     <td style="width: 350px">
                                         <div class="progress" style="height: 5px; width: 100%">
@@ -74,9 +83,17 @@
 
         <!-- VÝDAVKY -->
         <div class="col-lg-4">
-            <div class="bg-white p-4">
+            <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
-                    <h4 class="text-primary m-0">Skutočné výdavky</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="text-primary m-0">Skutočné výdavky</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
+                            <label class="form-check-label" for="checkDefault">
+                                Márnosti
+                            </label>
+                        </div>
+                    </div>
                     <table class="table align-middle table-hover m-0">
                         @foreach($spends as $date => $itemsByDate)
                         <thead>
@@ -113,7 +130,10 @@
                     <h4 class="text-primary m-0">Nový výdavok</h4>
                     <form wire:submit="save" class="vstack gap-2" id="brekeke">
                         <input type="date" wire:model="form.date" class="form-control">
-                        <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
+                        <div class="input-group">
+                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
+                            <span class="input-group-text" id="basic-addon1">EUR</span>
+                        </div>
                         <select wire:model="form.category_id" class="form-select">
                             <option value="">Kategória</option>
                             @foreach($items as $item)
