@@ -128,26 +128,29 @@
             <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Nový výdavok</h4>
-                    <form wire:submit="save" class="vstack gap-2" id="brekeke">
-                        <input type="date" wire:model="form.date" class="form-control">
+                    <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
+                        <input type="date" wire:model="form.date" class="form-control" wire:loading.attr="disabled" wire:target="save">
                         <div class="input-group">
-                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma">
+                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
                             <span class="input-group-text" id="basic-addon1">EUR</span>
                         </div>
-                        <select wire:model="form.category_id" class="form-select">
+                        <select wire:model="form.category_id" class="form-select" wire:loading.attr="disabled" wire:target="save">
                             <option value="">Kategória</option>
                             @foreach($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
-                        <input type="text" wire:model="form.title" class="form-control" placeholder="Názov">
+                        <input type="text" wire:model="form.title" class="form-control" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
                         <div class="form-check m-0">
-                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox">
+                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
                             <label class="form-check-label" for="is_discretionary">Márnosť</label>
                         </div>
                     </form>
-                    <button type="submit" class="btn btn-success btn-sm" form="brekeke">
-                        Uložiť
+                    <button type="submit" class="btn btn-success btn-sm" form="addSpendForm" wire:loading.attr="disabled">
+                        <span wire:loading.remove>Uložiť</span>
+                        <div class="spinner-border spinner-border-sm" role="status" wire:loading>
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </button>
                 </div>
             </div>
