@@ -32,6 +32,12 @@
             <div class="bg-white p-4 mb-4 d-none d-lg-block">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Plán</h4>
+                    @if($items->isEmpty())
+                    <div class="alert alert-light m-0" role="alert">
+                        Žiaden plán
+                    </div>
+                    @endif
+                    @if($items->isNotEmpty())
                     <table class="table table-hover align-middle m-0">
                         <thead class="">
                             <tr>
@@ -77,6 +83,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @endif
                 </div>
             </div>
         </div>
@@ -87,13 +94,21 @@
                 <div class="vstack gap-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="text-primary m-0">Skutočné výdavky</h4>
+                        @if($spends->isNotEmpty())
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
                             <label class="form-check-label" for="checkDefault">
                                 Márnosti
                             </label>
                         </div>
+                        @endif
                     </div>
+                    @if($spends->isEmpty())
+                    <div class="alert alert-light m-0" role="alert">
+                        Zatiaľ žiadne výdavky
+                    </div>
+                    @endif
+                    @if($spends->isNotEmpty())
                     <table class="table align-middle table-hover m-0">
                         @foreach($spends as $date => $itemsByDate)
                         <thead>
@@ -118,6 +133,8 @@
                         </tbody>
                         @endforeach
                     </table>
+                    @endif
+
                 </div>
             </div>
         </div>
