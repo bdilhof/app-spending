@@ -20,7 +20,7 @@ class Create extends Component
 
     public $verse;
 
-    public bool $is_discretionary = false;
+    public $is_discretionary = false;
 
     #[Session]
     public string $month = '2026-02';
@@ -61,7 +61,6 @@ class Create extends Component
             ->when($this->is_discretionary, function ($query) {
                 $query->where('is_discretionary', $this->is_discretionary);
             })
-            ->where('is_discretionary', $this->is_discretionary)
             ->orderByDesc('date')
             ->get()
             ->mapToGroups(function ($spend) {
