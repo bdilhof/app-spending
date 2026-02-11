@@ -1,5 +1,4 @@
 <div class="container-fluid p-4">
-
     <div class="row">
         <div class="col">
             <div class="d-none d-lg-block bg-white mb-4 p-4">
@@ -62,7 +61,7 @@
                                     <td class="text-right">{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                     <td style="width: 350px">
                                         <div class="progress" style="height: 5px; width: 100%">
-                                            <div class="progress-bar {{ $percentage <= 50 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
+                                            <div class="progress-bar bg-secondary {{ $percentage <= 50 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -82,7 +81,7 @@
                         @foreach($spends as $date => $itemsByDate)
                         <thead>
                             <tr>
-                                <th>{{ $date }}</th>
+                                <th>{{ humanDate($date) }}</th>
                                 <th class="text-right">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
                             </tr>
                         </thead>
@@ -106,8 +105,9 @@
             </div>
         </div>
 
-        <!-- FORM -->
         <div class="col-lg-3">
+
+            <!-- FORM -->
             <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Nový výdavok</h4>
@@ -131,7 +131,17 @@
                     </button>
                 </div>
             </div>
-        </div>
 
+            <!-- OVERVIEW -->
+            <div class="bg-white p-4">
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Tento mesiac</h4>
+                    <div>
+                        <p class="m-0">Výdavky celkom: <b>{{ formatCurrency($this->spends->flatten()->sum('amount')) }}</b></p>
+                        <p class="m-0">Márnosti: <b>{{ formatCurrency($this->spends->flatten()->where('is_discretionary', true)->sum('amount')) }}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
