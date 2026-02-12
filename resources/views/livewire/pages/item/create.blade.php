@@ -27,8 +27,105 @@
 
     <div class="row">
 
+        <div class="col-lg-3 order-lg-3">
+
+            <!-- FORM -->
+            <div class="bg-white p-4 mb-4">
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Nový výdavok</h4>
+                    <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
+                        <div class="input-group">
+                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
+                            <span class="input-group-text" id="basic-addon1">EUR</span>
+                        </div>
+                        <select wire:model="form.category_id" class="form-select" wire:loading.attr="disabled" wire:target="save">
+                            <option value="">Kategória</option>
+                            @foreach($items as $item)
+                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
+                        </select>
+                        <input type="text" wire:model="form.title" class="form-control" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
+                        <input type="date" wire:model="form.date" class="form-control" wire:loading.attr="disabled" wire:target="save">
+                        <div class="form-check m-0">
+                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
+                            <label class="form-check-label" for="is_discretionary">Márnosť</label>
+                        </div>
+                    </form>
+                    <button type="submit" class="btn btn-success" form="addSpendForm" wire:loading.attr="disabled">
+                        <span wire:loading.remove>Uložiť</span>
+                        <div class="spinner-border spinner-border-sm" role="status" wire:loading>
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <div class="bg-white p-4 mb-4">
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Tento mesiac</h4>
+                    <div>
+                        <p class="m-0">Výdavky celkom: <b>{{ formatCurrency($this->spends->flatten()->sum('amount')) }}</b></p>
+                        <p class="m-0">Márnosti: <b>{{ formatCurrency($this->spends->flatten()->where('is_discretionary', true)->sum('amount')) }}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- VÝDAVKY -->
+        <div class="col-lg-4 order-lg-2">
+            <div class="bg-white p-4 mb-4">
+                <div class="vstack gap-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="text-primary text-nowrap m-0">Skutočné výdavky</h4>
+                        @if($spends->isNotEmpty())
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
+                            <label class="form-check-label" for="checkDefault">
+                                Márnosti
+                            </label>
+                        </div>
+                        @endif
+                    </div>
+                    @if($spends->isEmpty())
+                    <div class="alert alert-light m-0" role="alert">
+                        Zatiaľ žiadne výdavky
+                    </div>
+                    @endif
+                    @if($spends->isNotEmpty())
+                        @foreach($spends as $date => $itemsByDate)
+                        <table class="table align-middle table-sm table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th>{{ humanDate($date) }}</th>
+                                    <th class="text-end text-nowrap">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($itemsByDate as $spend)
+                                <tr>
+                                    <td>
+                                        {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
+                                        <br>
+                                        <span class="text-muted text-sm">{{ $spend->category->title }}</span>
+                                    </td>
+                                    <td class="text-end text-nowrap">
+                                        {{ formatCurrency($spend->amount) }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <!-- ROZPOČET -->
-        <div class="col-lg-5">
+        <div class="col-lg-5 order-lg-1">
             <div class="bg-white p-4 mb-4 d-none d-lg-block">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Plán</h4>
@@ -88,99 +185,5 @@
             </div>
         </div>
 
-        <!-- VÝDAVKY -->
-        <div class="col-lg-4">
-            <div class="bg-white p-4 mb-4">
-                <div class="vstack gap-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="text-primary m-0">Skutočné výdavky</h4>
-                        @if($spends->isNotEmpty())
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
-                            <label class="form-check-label" for="checkDefault">
-                                Márnosti
-                            </label>
-                        </div>
-                        @endif
-                    </div>
-                    @if($spends->isEmpty())
-                    <div class="alert alert-light m-0" role="alert">
-                        Zatiaľ žiadne výdavky
-                    </div>
-                    @endif
-                    @if($spends->isNotEmpty())
-                        @foreach($spends as $date => $itemsByDate)
-                        <table class="table align-middle table-sm table-hover">
-                            <thead class="">
-                                <tr>
-                                    <th>{{ humanDate($date) }}</th>
-                                    <th class="text-end text-nowrap">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($itemsByDate as $spend)
-                                <tr>
-                                    <td>
-                                        {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
-                                        <br>
-                                        <span class="text-muted text-sm">{{ $spend->category->title }}</span>
-                                    </td>
-                                    <td class="text-end text-nowrap">
-                                        {{ formatCurrency($spend->amount) }}
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @endforeach
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-
-            <!-- FORM -->
-            <div class="bg-white p-4 mb-4">
-                <div class="vstack gap-4">
-                    <h4 class="text-primary m-0">Nový výdavok</h4>
-                    <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
-                        <div class="input-group">
-                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
-                            <span class="input-group-text" id="basic-addon1">EUR</span>
-                        </div>
-                        <select wire:model="form.category_id" class="form-select" wire:loading.attr="disabled" wire:target="save">
-                            <option value="">Kategória</option>
-                            @foreach($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
-                        </select>
-                        <input type="text" wire:model="form.title" class="form-control" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
-                        <input type="date" wire:model="form.date" class="form-control" wire:loading.attr="disabled" wire:target="save">
-                        <div class="form-check m-0">
-                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
-                            <label class="form-check-label" for="is_discretionary">Márnosť</label>
-                        </div>
-                    </form>
-                    <button type="submit" class="btn btn-success btn-sm" form="addSpendForm" wire:loading.attr="disabled">
-                        <span wire:loading.remove>Uložiť</span>
-                        <div class="spinner-border spinner-border-sm" role="status" wire:loading>
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </button>
-                </div>
-            </div>
-
-            <!-- OVERVIEW -->
-            <div class="bg-white p-4">
-                <div class="vstack gap-4">
-                    <h4 class="text-primary m-0">Tento mesiac</h4>
-                    <div>
-                        <p class="m-0">Výdavky celkom: <b>{{ formatCurrency($this->spends->flatten()->sum('amount')) }}</b></p>
-                        <p class="m-0">Márnosti: <b>{{ formatCurrency($this->spends->flatten()->where('is_discretionary', true)->sum('amount')) }}</b></p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
