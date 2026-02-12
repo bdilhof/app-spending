@@ -1,7 +1,7 @@
 <div class="container-fluid p-4">
     <div class="row">
         <div class="col">
-            <div class="d-none d-lg-block bg-white mb-4 p-4">
+            <div class="d-none d-lg-block mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <figure class="mb-0">
                         <blockquote class="blockquote m-0">
@@ -63,17 +63,17 @@
                                     <td class="text-muted" style="width: 25px">
                                         <i class="bi bi-{{ $category->icon }}"></i>
                                     </td>
-                                    <td>
+                                    <td>{{ $category->title }}</td>
+                                    <td class="text-right">
                                         <span
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="right"
                                             data-bs-custom-class="custom-tooltip"
                                             data-bs-html="true"
                                             data-bs-title="Minuté <b>{{ formatCurrency($spend) }}</b> z mesačného rozpočtu <b>{{ $budget ? formatCurrency($budget) : '—' }}</b>">
-                                            {{ $category->title }}
+                                            {{ $budget ? formatCurrency($budget - $spend) : '—' }}
                                         </span>
                                     </td>
-                                    <td class="text-right">{{ $budget ? formatCurrency($budget - $spend) : '—' }}</td>
                                     <td style="width: 350px">
                                         <div class="progress" style="height: 5px; width: 100%">
                                             <div class="progress-bar bg-secondary {{ $percentage <= 50 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
@@ -109,32 +109,31 @@
                     </div>
                     @endif
                     @if($spends->isNotEmpty())
-                    <table class="table align-middle table-hover m-0">
                         @foreach($spends as $date => $itemsByDate)
-                        <thead>
-                            <tr>
-                                <th>{{ humanDate($date) }}</th>
-                                <th class="text-end">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($itemsByDate as $spend)
-                            <tr>
-                                <td>
-                                    {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
-                                    <br>
-                                    <span class="text-muted text-sm">{{ $spend->category->title }}</span>
-                                </td>
-                                <td class="text-end text-nowrap">
-                                    {{ formatCurrency($spend->amount) }}
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                        <table class="table align-middle table-sm table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th>{{ humanDate($date) }}</th>
+                                    <th class="text-end">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($itemsByDate as $spend)
+                                <tr>
+                                    <td>
+                                        {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
+                                        <br>
+                                        <span class="text-muted text-sm">{{ $spend->category->title }}</span>
+                                    </td>
+                                    <td class="text-end text-nowrap">
+                                        {{ formatCurrency($spend->amount) }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                         @endforeach
-                    </table>
                     @endif
-
                 </div>
             </div>
         </div>
@@ -146,7 +145,6 @@
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Nový výdavok</h4>
                     <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
-                        <input type="date" wire:model="form.date" class="form-control" wire:loading.attr="disabled" wire:target="save">
                         <div class="input-group">
                             <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
                             <span class="input-group-text" id="basic-addon1">EUR</span>
@@ -158,6 +156,7 @@
                             @endforeach
                         </select>
                         <input type="text" wire:model="form.title" class="form-control" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
+                        <input type="date" wire:model="form.date" class="form-control" wire:loading.attr="disabled" wire:target="save">
                         <div class="form-check m-0">
                             <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
                             <label class="form-check-label" for="is_discretionary">Márnosť</label>
