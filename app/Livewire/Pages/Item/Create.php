@@ -90,6 +90,8 @@ class Create extends Component
 
     public function save()
     {
+        $this->validate();
+
         $this->form->store();
 
         return redirect('/');

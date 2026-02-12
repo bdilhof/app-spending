@@ -34,18 +34,36 @@
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Nový výdavok</h4>
                     <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
-                        <div class="input-group">
-                            <input type="number" inputmode="decimal" wire:model="form.amount" class="form-control form-control-lg" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
+                        <div class="input-group has-validation">
+                            <input type="number" inputmode="decimal" wire:model="form.amount" class="form-control form-control-lg {{ $errors->has('form.amount') ? 'is-invalid' : '' }}" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
                             <span class="input-group-text" id="basic-addon1">EUR</span>
+                            @error('form.amount')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <select wire:model="form.category_id" class="form-select form-select-lg" wire:loading.attr="disabled" wire:target="save">
-                            <option value="">Kategória</option>
-                            @foreach($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
-                        </select>
-                        <input type="text" wire:model="form.title" class="form-control form-control-lg" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
-                        <input type="date" wire:model="form.date" class="form-control form-control-lg" wire:loading.attr="disabled" wire:target="save">
+                        <div>
+                            <select wire:model="form.category_id" class="form-select form-select-lg {{ $errors->has('form.category_id') ? 'is-invalid' : '' }}" wire:loading.attr="disabled" wire:target="save">
+                                <option value="">Kategória</option>
+                                @foreach($items as $item)
+                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('form.category_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div>
+                            <input type="text" wire:model="form.title" class="form-control form-control-lg {{ $errors->has('form.title') ? 'is-invalid' : '' }}" placeholder="Názov" wire:loading.attr="disabled" wire:target="save">
+                            @error('form.title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div>
+                            <input type="date" wire:model="form.date" class="form-control form-control-lg {{ $errors->has('form.date') ? 'is-invalid' : '' }}" wire:loading.attr="disabled" wire:target="save">
+                            @error('form.date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-check m-0">
                             <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
                             <label class="form-check-label" for="is_discretionary">Márnosť</label>

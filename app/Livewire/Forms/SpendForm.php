@@ -28,10 +28,29 @@ class SpendForm extends Form
         ];
     }
 
+    protected function messages(): array
+    {
+        return [
+            'title' => [
+                'required' => 'Zadaj názov',
+                'string' => 'Zadaj správnu hodnotu',
+            ],
+            'amount' => [
+                'required' => 'Zadaj sumu',
+                'numeric' => 'Zadaj číselnú hodnotu',
+            ],
+            'category_id' => [
+                'required' => 'Zadaj kategóriu',
+            ],
+            'date' => [
+                'required' => 'Zadaj dátum',
+                'date' => 'Zadaj platný dátum',
+            ],
+        ];
+    }
+
     public function store()
     {
-        $this->validate();
-
         Spend::create($this->only([
             'title',
             'amount',
