@@ -35,7 +35,7 @@
                     <h4 class="text-primary m-0">Nový výdavok</h4>
                     <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
                         <div class="input-group">
-                            <input type="number" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
+                            <input type="number" inputmode="decimal" wire:model="form.amount" class="form-control" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
                             <span class="input-group-text" id="basic-addon1">EUR</span>
                         </div>
                         <select wire:model="form.category_id" class="form-select" wire:loading.attr="disabled" wire:target="save">
@@ -71,8 +71,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <!-- VÝDAVKY -->
         <div class="col-lg-4 order-lg-2">
@@ -184,6 +182,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
