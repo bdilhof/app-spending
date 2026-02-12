@@ -114,7 +114,7 @@
                             <thead class="">
                                 <tr>
                                     <th>{{ humanDate($date) }}</th>
-                                    <th class="text-end">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
+                                    <th class="text-end text-nowrap">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
                                 </tr>
                             </thead>
                             <tbody>
