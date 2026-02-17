@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Livewire\Pages\Item;
+namespace App\Livewire\Pages;
 
 use App\Livewire\Forms\SpendForm;
 use App\Models\Category;
 use App\Models\Spend;
 use Carbon\Carbon;
 use Livewire\Attributes\Session;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Create extends Component
+class Dashboard extends Component
 {
     public SpendForm $form;
 
@@ -97,9 +96,8 @@ class Create extends Component
         return redirect('/');
     }
 
-    #[Title('Spends')]
     public function render()
     {
-        return view('livewire.pages.item.create');
+        return view('livewire.pages.dashboard');
     }
 }

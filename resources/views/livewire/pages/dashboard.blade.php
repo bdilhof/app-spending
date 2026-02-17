@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div>
     <div class="row">
         <div class="col">
             <div class="d-none d-lg-block mb-4">
@@ -26,14 +26,13 @@
     </div>
 
     <div class="row">
-
         <div class="col-lg-3 order-lg-3">
 
             <!-- FORM -->
             <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Nový výdavok</h4>
-                    <form wire:submit="save" class="vstack gap-2" id="addSpendForm">
+                    <form wire:submit="save" class="vstack gap-2" id="addSpendForm" x-data="{ isDiscretionary: @entangle('form.is_discretionary') }">
                         <div class="input-group has-validation">
                             <input type="number" inputmode="decimal" wire:model="form.amount" class="form-control form-control-lg {{ $errors->has('form.amount') ? 'is-invalid' : '' }}" step="0.01" placeholder="Suma" wire:loading.attr="disabled" wire:target="save">
                             <span class="input-group-text" id="basic-addon1">EUR</span>
@@ -65,9 +64,12 @@
                             @enderror
                         </div>
                         <div class="form-check m-0">
-                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
+                            <input class="form-check-input" wire:model.live="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
                             <label class="form-check-label" for="is_discretionary">Márnosť</label>
                         </div>
+                        <template x-if="isDiscretionary">
+                            <p class="m-0">Bolo to naozaj potrebné?</p>
+                        </template>
                     </form>
                     <button type="submit" class="btn btn-success" form="addSpendForm" wire:loading.attr="disabled">
                         <span wire:loading.remove>Uložiť</span>
@@ -123,8 +125,12 @@
                                 @foreach($itemsByDate as $spend)
                                 <tr>
                                     <td>
-                                        {{ $spend->title }} {{ $spend->is_discretionary ? '- márnosť' : '' }}
-                                        <br>
+                                        <div class="d-flex gap-2">
+                                            @if($spend->is_discretionary)
+                                            <i class="bi bi-emoji-astonished-fill text-secondary"></i>
+                                            @endif
+                                            <span>{{ $spend->title }}</span>
+                                        </div>
                                         <span class="text-muted text-sm">{{ $spend->category->title }}</span>
                                     </td>
                                     <td class="text-end text-nowrap">
