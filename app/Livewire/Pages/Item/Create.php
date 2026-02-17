@@ -97,7 +97,7 @@ class Create extends Component
         return redirect('/');
     }
 
-    #[Title('Spends')]
+    #[Title('Dashboard')]
     public function render()
     {
         return view('livewire.pages.item.create');
