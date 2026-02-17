@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Spend;
 use Carbon\Carbon;
 use Livewire\Attributes\Session;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -97,7 +96,6 @@ class Dashboard extends Component
         return redirect('/');
     }
 
-    #[Title('Dashboard')]
     public function render()
     {
         return view('livewire.pages.dashboard');
