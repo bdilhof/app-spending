@@ -7,8 +7,17 @@ use Symfony\Component\Dotenv\Dotenv;
 require __DIR__.'/vendor/autoload.php';
 require 'recipe/laravel.php';
 
-$dotenv = new Dotenv;
-$dotenv->load(__DIR__.'/.env');
+// Load environment variables
+if (file_exists(__DIR__.'/.env')) {
+    $dotenv = new Dotenv;
+    $dotenv->load(__DIR__.'/.env');
+} else {
+    // Fallback when .env not exist
+    $_ENV['DEP_PROD_HOSTNAME'] = getenv('DEP_PROD_HOSTNAME');
+    $_ENV['DEP_PROD_REMOTE_USER'] = getenv('DEP_PROD_REMOTE_USER');
+    $_ENV['DEP_PROD_DEPLOY_PATH'] = getenv('DEP_PROD_DEPLOY_PATH');
+    $_ENV['DEP_PROD_BRANCH'] = getenv('DEP_PROD_BRANCH');
+}
 
 set('repository', 'git@github.com:bdilhof/app-manna.git');
 set('keep_releases', 3);
@@ -19,20 +28,6 @@ host('develop')
     ->setRemoteUser(env('DEPLOYER_DEVELOP_REMOTE_USER'))
     ->setDeployPath(env('DEPLOYER_DEVELOP_DEPLOY_PATH'))
     ->set('branch', env('DEPLOYER_DEVELOP_BRANCH'));
-
-/*
-task('deploy', [
-    'deploy:prepare',
-    'deploy:vendors',
-    'artisan:storage:link',
-    'artisan:config:cache',
-    'artisan:route:cache',
-    'artisan:view:cache',
-    'artisan:event:cache',
-    'artisan:migrate',
-    'deploy:publish',
-]);
-*/
 
 task('build', function () {
     $useNvm = get('use_nvm');
