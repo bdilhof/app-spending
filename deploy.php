@@ -13,6 +13,12 @@ $dotenv->load(__DIR__.'/.env');
 set('repository', 'git@github.com:bdilhof/app-manna.git');
 set('keep_releases', 3);
 
+host('develop')
+    ->setHostname(env('DEPLOYER_DEVELOP_HOSTNAME'))
+    ->setRemoteUser(env('DEPLOYER_DEVELOP_REMOTE_USER'))
+    ->setDeployPath(env('DEPLOYER_DEVELOP_DEPLOY_PATH'))
+    ->set('branch', env('DEPLOYER_DEVELOP_BRANCH'));
+
 host('production')
     ->setHostname(env('DEPLOYER_PRODUCTION_HOSTNAME'))
     ->setRemoteUser(env('DEPLOYER_PRODUCTION_REMOTE_USER'))
