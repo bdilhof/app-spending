@@ -13,10 +13,10 @@ if (file_exists(__DIR__.'/.env')) {
     $dotenv->load(__DIR__.'/.env');
 } else {
     // Fallback when .env not exist
-    $_ENV['DEP_PROD_HOSTNAME'] = getenv('DEP_PROD_HOSTNAME');
-    $_ENV['DEP_PROD_REMOTE_USER'] = getenv('DEP_PROD_REMOTE_USER');
-    $_ENV['DEP_PROD_DEPLOY_PATH'] = getenv('DEP_PROD_DEPLOY_PATH');
-    $_ENV['DEP_PROD_BRANCH'] = getenv('DEP_PROD_BRANCH');
+    $_ENV['DEPLOYER_DEVELOP_HOSTNAME'] = getenv('DEPLOYER_DEVELOP_HOSTNAME');
+    $_ENV['DEPLOYER_DEVELOP_REMOTE_USER'] = getenv('DEPLOYER_DEVELOP_REMOTE_USER');
+    $_ENV['DEPLOYER_DEVELOP_DEPLOY_PATH'] = getenv('DEPLOYER_DEVELOP_DEPLOY_PATH');
+    $_ENV['DEPLOYER_DEVELOP_BRANCH'] = getenv('DEPLOYER_DEVELOP_BRANCH');
 }
 
 set('repository', 'git@github.com:bdilhof/app-manna.git');
