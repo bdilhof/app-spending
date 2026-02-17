@@ -12,6 +12,8 @@
     </head>
     <body class="bg-secondary-subtle">
 
+        <h1>Brekeke</h1>
+
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
