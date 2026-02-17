@@ -24,10 +24,10 @@ set('keep_releases', 3);
 set('use_nvm', false);
 
 host('develop')
-    ->setHostname(env('DEPLOYER_DEVELOP_HOSTNAME'))
-    ->setRemoteUser(env('DEPLOYER_DEVELOP_REMOTE_USER'))
-    ->setDeployPath(env('DEPLOYER_DEVELOP_DEPLOY_PATH'))
-    ->set('branch', env('DEPLOYER_DEVELOP_BRANCH'));
+    ->setHostname($_ENV['DEPLOYER_DEVELOP_HOSTNAME'] ?? '')
+    ->setRemoteUser($_ENV['DEPLOYER_DEVELOP_REMOTE_USER'] ?? '')
+    ->setDeployPath($_ENV['DEPLOYER_DEVELOP_DEPLOY_PATH'] ?? '')
+    ->set('branch', $_ENV['DEPLOYER_DEVELOP_BRANCH'] ?? '');
 
 task('build', function () {
     $useNvm = get('use_nvm');
