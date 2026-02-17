@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Pages\Item\Create;
+use App\Livewire\Pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Create::class)->name('dashboard');
+Route::get('/', Dashboard::class)->name('dashboard');
