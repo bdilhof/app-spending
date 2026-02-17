@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches: [develop]
+
+concurrency: production_environment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Deploy
+        env:
+          DEPLOYER_PRODUCTION_HOSTNAME: ${{ secrets.DEPLOYER_PRODUCTION_HOSTNAME }}
+          DEPLOYER_PRODUCTION_REMOTE_USER: ${{ secrets.DEPLOYER_PRODUCTION_REMOTE_USER }}
+          DEPLOYER_PRODUCTION_DEPLOY_PATH: ${{ secrets.DEPLOYER_PRODUCTION_DEPLOY_PATH }}
+          DEPLOYER_PRODUCTION_BRANCH: ${{ secrets.DEPLOYER_PRODUCTION_BRANCH }}
+        uses: deployphp/action@v1
+        with:
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          dep: deploy

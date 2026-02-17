@@ -20,12 +20,7 @@ host('develop')
     ->setDeployPath(env('DEPLOYER_DEVELOP_DEPLOY_PATH'))
     ->set('branch', env('DEPLOYER_DEVELOP_BRANCH'));
 
-host('production')
-    ->setHostname(env('DEPLOYER_PRODUCTION_HOSTNAME'))
-    ->setRemoteUser(env('DEPLOYER_PRODUCTION_REMOTE_USER'))
-    ->setDeployPath(env('DEPLOYER_PRODUCTION_DEPLOY_PATH'))
-    ->set('branch', env('DEPLOYER_PRODUCTION_BRANCH'));
-
+/*
 task('deploy', [
     'deploy:prepare',
     'deploy:vendors',
@@ -37,6 +32,7 @@ task('deploy', [
     'artisan:migrate',
     'deploy:publish',
 ]);
+*/
 
 task('build', function () {
     $useNvm = get('use_nvm');
