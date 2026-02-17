@@ -15,7 +15,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <a class="navbar-brand" href="{{ route('app.dashboard') }}">
                     {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
@@ -29,16 +29,16 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a @class(['nav-link', 'active' => request()->routeIs('dashboard')]) href="{{ route('dashboard') }}">Dashboard</a>
+                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.dashboard')]) href="{{ route('app.dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a @class(['nav-link', 'active' => request()->routeIs('budget')]) href="{{ route('budget') }}">Rozpočet</a>
+                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.budget')]) href="{{ route('app.budget') }}">Rozpočet</a>
                             </li>
                             <li class="nav-item">
-                                <a @class(['nav-link', 'active' => request()->routeIs('expenses')]) href="{{ route('expenses') }}">Výdavky</a>
+                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.expenses')]) href="{{ route('app.expenses') }}">Výdavky</a>
                             </li>
                             <li class="nav-item">
-                                <a @class(['nav-link', 'active' => request()->routeIs('settings')]) href="{{ route('settings') }}">Nastavenia</a>
+                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.settings')]) href="{{ route('app.settings') }}">Nastavenia</a>
                             </li>
                         </ul>
                     </div>
