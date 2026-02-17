@@ -2,16 +2,22 @@
 
 namespace Deployer;
 
+use Symfony\Component\Dotenv\Dotenv;
+
+require __DIR__.'/vendor/autoload.php';
 require 'recipe/laravel.php';
 
-set('repository', 'git@github.com:bdilhof/app-spending.git');
+$dotenv = new Dotenv;
+$dotenv->load(__DIR__.'/.env');
+
+set('repository', 'git@github.com:bdilhof/app-manna.git');
 set('keep_releases', 3);
 
 host('production')
-    ->setHostname('178.128.181.104')
-    ->setRemoteUser('deployer')
-    ->setDeployPath('/var/www/html/app-spending')
-    ->set('branch', 'main');
+    ->setHostname(env('DEPLOYER_PRODUCTION_HOSTNAME'))
+    ->setRemoteUser(env('DEPLOYER_PRODUCTION_REMOTE_USER'))
+    ->setDeployPath(env('DEPLOYER_PRODUCTION_DEPLOY_PATH'))
+    ->set('branch', env('DEPLOYER_PRODUCTION_BRANCH'));
 
 task('deploy', [
     'deploy:prepare',
