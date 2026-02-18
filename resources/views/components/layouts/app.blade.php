@@ -12,8 +12,6 @@
     </head>
     <body class="bg-secondary-subtle">
 
-        <h1>Brekeke 111 TEST 2 HUJA HUJA</h1>
-
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
