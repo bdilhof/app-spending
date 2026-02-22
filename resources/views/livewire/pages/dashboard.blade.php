@@ -182,7 +182,17 @@
                                     <td class="text-muted" style="width: 25px">
                                         <i class="bi bi-{{ $category->icon }}"></i>
                                     </td>
-                                    <td>{{ $category->title }}</td>
+                                    @php
+                                    $budgetOverflow = false;
+
+                                    if ($budget && ($budget - $spend) < 0) {
+                                        $budgetOverflow = true;
+                                    }
+                                    @endphp
+
+                                    <td class="{{ $budgetOverflow ? 'text-danger fw-bold' : '' }}">
+                                        {{ $category->title }}
+                                    </td>
                                     <td class="text-right">
                                         <span
                                             data-bs-toggle="tooltip"
