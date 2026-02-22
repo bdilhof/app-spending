@@ -78,14 +78,6 @@
                 <div class="vstack gap-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="text-primary text-nowrap m-0">Dnes</h4>
-                        @if($spends->isNotEmpty())
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
-                            <label class="form-check-label" for="checkDefault">
-                                Márnosti
-                            </label>
-                        </div>
-                        @endif
                     </div>
                     @if($spends->isEmpty())
                     <div class="alert alert-light m-0" role="alert">

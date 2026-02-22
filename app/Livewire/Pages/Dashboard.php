@@ -17,8 +17,6 @@ class Dashboard extends Component
 
     public $spends;
 
-    public $verse;
-
     public $is_discretionary = false;
 
     #[Session]
@@ -28,11 +26,6 @@ class Dashboard extends Component
     {
         $this->categories = Category::query()->orderBy('title', 'desc')->get();
         $this->form->date = now()->toDateString();
-        $this->loadData();
-    }
-
-    public function updatedIsDiscretionary()
-    {
         $this->loadData();
     }
 
