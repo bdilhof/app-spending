@@ -9,8 +9,11 @@ class Dashboard extends Component
 {
     public $spends;
 
+    public $month;
+
     public function mount(): void
     {
+        $this->month = '2026-02';
         $this->loadData();
     }
 

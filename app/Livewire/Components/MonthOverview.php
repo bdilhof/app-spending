@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Models\Spend;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class MonthOverview extends Component
@@ -11,7 +12,18 @@ class MonthOverview extends Component
 
     public float $discrepancies;
 
+    #[On('month-changed')]
+    public function test($month)
+    {
+        $this->loadData();
+    }
+
     public function mount()
+    {
+        $this->loadData();
+    }
+
+    private function loadData()
     {
         $totals = Spend::query()
             ->whereBetween('date', ['2026-02-01', '2026-02-28'])
