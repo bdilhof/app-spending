@@ -81,7 +81,7 @@
             </div>
 
             <!-- OVERVIEW -->
-            <div class="bg-white p-4 mb-4">
+            <div class="bg-white p-4 mb-4 d-none d-lg-block">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Tento mesiac</h4>
                     <div>
