@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Components;
 
-use Livewire\Component;
 use App\Models\Spend;
-use App\Models\Category;
+use Livewire\Component;
 
 class MonthOverview extends Component
 {
