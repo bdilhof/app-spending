@@ -31,31 +31,19 @@
         </div>
         @endif
 
+        <!-- Table -->
         @if($spends->isNotEmpty())
             @foreach($spends as $date => $itemsByDate)
             <table class="table align-middle table-sm table-hover">
-                <thead class="">
+                <thead>
                     <tr>
-                        <th>{{ humanDate($date) }}</th>
+                        <th>{{ $date }}</th>
                         <th class="text-end text-nowrap">{{ formatCurrency($itemsByDate->sum('amount')) }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($itemsByDate as $spend)
-                    <tr>
-                        <td>
-                            <div class="d-flex gap-2">
-                                @if($spend->is_discretionary)
-                                <i class="bi bi-emoji-astonished-fill text-secondary"></i>
-                                @endif
-                                <span>{{ $spend->title }}</span>
-                            </div>
-                            <span class="text-muted text-sm">{{ $spend->category->title }}</span>
-                        </td>
-                        <td class="text-end text-nowrap">
-                            {{ formatCurrency($spend->amount) }}
-                        </td>
-                    </tr>
+                    <livewire:components.expense-table-row :$spend />
                     @endforeach
                 </tbody>
             </table>
