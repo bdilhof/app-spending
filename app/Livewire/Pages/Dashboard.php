@@ -13,7 +13,7 @@ class Dashboard extends Component
 {
     public SpendForm $form;
 
-    // public $items;
+    public $categories;
 
     public $spends;
 
@@ -26,6 +26,7 @@ class Dashboard extends Component
 
     public function mount(): void
     {
+        $this->categories = Category::query()->orderBy('title', 'desc')->get();
         $this->form->date = now()->toDateString();
         $this->loadData();
     }

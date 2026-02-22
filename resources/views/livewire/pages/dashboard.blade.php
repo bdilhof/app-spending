@@ -3,7 +3,7 @@
         <div class="col">
             <div class="d-none d-lg-block mb-4">
                 <div class="d-flex justify-content-between align-items-center">
-                    <livewire:bible-verse :month="$month" />
+                    <livewire:components.bible-verse :month="$month" />
                     <div class="input-group w-auto">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-calendar-month"></i>
@@ -17,9 +17,8 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="col-lg-3 order-lg-3">
+        <div class="col-lg-4">
 
             <!-- FORM -->
             <div class="bg-white p-4 mb-4">
@@ -36,8 +35,8 @@
                         <div>
                             <select wire:model="form.category_id" class="form-select form-select-lg {{ $errors->has('form.category_id') ? 'is-invalid' : '' }}" wire:loading.attr="disabled" wire:target="save">
                                 <option value="">Kategória</option>
-                                @foreach($items as $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
                             </select>
                             @error('form.category_id')
@@ -72,23 +71,8 @@
                     </button>
                 </div>
             </div>
-
-            <!-- OVERVIEW -->
-            <div class="bg-white p-4 mb-4 d-none d-lg-block">
-                <div class="vstack gap-4">
-                    <h4 class="text-primary m-0">Tento mesiac</h4>
-                    <div>
-                        <p class="m-0">Výdavky celkom: <b>{{ formatCurrency($this->spends->flatten()->sum('amount')) }}</b></p>
-                        <p class="m-0">Márnosti: <b>{{ formatCurrency($this->spends->flatten()->where('is_discretionary', true)->sum('amount')) }}</b></p>
-                    </div>
-                </div>
-            </div>
         </div>
-
-        <!-- VÝDAVKY -->
-        <div class="col-lg-4 order-lg-2">
-
-
+        <div class="col-lg-4">
             <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
                     <div class="d-flex justify-content-between align-items-center">
@@ -140,10 +124,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4">
 
-        <!-- ROZPOČET -->
-        <div class="col-lg-5 order-lg-1">
-            <livewire:budget />
+            <!-- OVERVIEW -->
+            <div class="bg-white p-4 mb-4 d-none d-lg-block">
+                <div class="vstack gap-4">
+                    <h4 class="text-primary m-0">Tento mesiac</h4>
+                    <div>
+                        <p class="m-0">Výdavky celkom: <b>{{ formatCurrency($this->spends->flatten()->sum('amount')) }}</b></p>
+                        <p class="m-0">Márnosti: <b>{{ formatCurrency($this->spends->flatten()->where('is_discretionary', true)->sum('amount')) }}</b></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
