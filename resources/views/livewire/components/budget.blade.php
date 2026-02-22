@@ -27,20 +27,18 @@
                     } else {
                         $percentage = 0;
                     }
+
+                    $budgetOverflow = false;
+
+                    if ($budget && ($budget - $spend) < 0) {
+                        $budgetOverflow = true;
+                    }
                     @endphp
+
                     <tr>
-                        <td class="text-muted" style="width: 25px">
+                        <td class="{{ $budgetOverflow ? 'text-danger fw-bold' : 'text-muted' }}" style="width: 25px">
                             <i class="bi bi-{{ $category->icon }}"></i>
                         </td>
-
-                        @php
-                        $budgetOverflow = false;
-
-                        if ($budget && ($budget - $spend) < 0) {
-                            $budgetOverflow = true;
-                        }
-                        @endphp
-
                         <td class="{{ $budgetOverflow ? 'text-danger fw-bold' : '' }}">
                             {{ $category->title }}
                         </td>
