@@ -37,7 +37,9 @@
                 <label class="form-check-label" for="is_discretionary">Márnosť</label>
             </div>
             <template x-if="isDiscretionary">
-                <p class="m-0">Bolo to naozaj potrebné?</p>
+                <div class="alert alert-primary m-0" role="alert">
+                    Bolo to naozaj potrebné?
+                </div>
             </template>
         </form>
         <button type="submit" class="btn btn-success" form="addSpendForm" wire:loading.attr="disabled">
