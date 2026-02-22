@@ -39,7 +39,6 @@ class Dashboard extends Component
     public function updatedMonth(): void
     {
         $this->loadData();
-        $this->getBibleVerse();
     }
 
     private function loadData(): void

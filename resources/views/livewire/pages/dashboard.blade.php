@@ -4,7 +4,7 @@
             <div class="d-none d-lg-block mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <livewire:components.bible-verse :month="$month" />
-                    <div class="input-group w-auto">
+                    <div class="input-group input-group-lg w-auto">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-calendar-month"></i>
                         </span>
