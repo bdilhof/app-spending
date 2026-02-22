@@ -3,14 +3,7 @@
         <div class="col">
             <div class="d-none d-lg-block mb-4">
                 <div class="d-flex justify-content-between align-items-center">
-                    <figure class="mb-0">
-                        <blockquote class="blockquote m-0">
-                            <p>{{ $verse['verse'] }}</p>
-                        </blockquote>
-                        <figcaption class="blockquote-footer m-0">
-                            <cite>{{ $verse['reference'] }}</cite>
-                        </figcaption>
-                    </figure>
+                    <livewire:bible-verse :month="$month" />
                     <div class="input-group w-auto">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="bi bi-calendar-month"></i>
