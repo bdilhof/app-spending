@@ -13,15 +13,24 @@
             @endif
         </div>
 
-        <div>
-            <input wire:model.live='search' class="form-control" placeholder="Hľadať" />
+        <!-- Filter -->
+        <div class="d-flex">
+            <input wire:model.live='search' class="form-control" placeholder="Hľadaj výdavok" />
+            <select class="form-select" wire:model.live="category">
+                <option>Vyber kategóriu</option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
         </div>
 
+        <!-- Empty -->
         @if($spends->isEmpty())
         <div class="alert alert-light m-0" role="alert">
             Zatiaľ žiadne výdavky
         </div>
         @endif
+
         @if($spends->isNotEmpty())
             @foreach($spends as $date => $itemsByDate)
             <table class="table align-middle table-sm table-hover">

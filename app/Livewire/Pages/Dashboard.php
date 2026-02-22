@@ -13,7 +13,7 @@ class Dashboard extends Component
 {
     public SpendForm $form;
 
-    public $items;
+    // public $items;
 
     public $spends;
 
@@ -28,7 +28,6 @@ class Dashboard extends Component
     {
         $this->form->date = now()->toDateString();
         $this->loadData();
-        $this->getBibleVerse();
     }
 
     public function updatedIsDiscretionary()
@@ -77,14 +76,6 @@ class Dashboard extends Component
             $date->copy()->startOfMonth()->toDateString(),
             $date->copy()->endOfMonth()->toDateString(),
         ];
-    }
-
-    private function getBibleVerse(): void
-    {
-        $verses = config('verses');
-        $date = Carbon::createFromFormat('Y-m', $this->month);
-
-        $this->verse = $verses[intval($date->format('m'))];
     }
 
     public function save()
