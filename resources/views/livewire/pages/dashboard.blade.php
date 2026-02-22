@@ -57,7 +57,7 @@
                             @enderror
                         </div>
                         <div class="form-check m-0">
-                            <input class="form-check-input" wire:model.live="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
+                            <input class="form-check-input" wire:model="form.is_discretionary" id="is_discretionary" type="checkbox" wire:loading.attr="disabled" wire:target="save">
                             <label class="form-check-label" for="is_discretionary">Márnosť</label>
                         </div>
                         <template x-if="isDiscretionary">
@@ -65,8 +65,8 @@
                         </template>
                     </form>
                     <button type="submit" class="btn btn-success" form="addSpendForm" wire:loading.attr="disabled">
-                        <span wire:loading.remove>Uložiť</span>
-                        <div class="spinner-border spinner-border-sm" role="status" wire:loading>
+                        <span wire:loading.remove wire:loading.target="save">Uložiť</span>
+                        <div class="spinner-border spinner-border-sm" role="status" wire:loading wire:loading.target="save">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </button>
