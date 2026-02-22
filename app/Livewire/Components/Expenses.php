@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Components;
 
-use Livewire\Component;
-use Carbon\Carbon;
-use App\Models\Spend;
 use App\Models\Category;
+use App\Models\Spend;
+use Carbon\Carbon;
+use Livewire\Component;
 
 class Expenses extends Component
 {

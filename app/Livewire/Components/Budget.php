@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\Category;
 use Carbon\Carbon;
 use Livewire\Component;
-use App\Models\Category;
 
 class Budget extends Component
 {
