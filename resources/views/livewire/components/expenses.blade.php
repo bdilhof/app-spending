@@ -2,7 +2,7 @@
     <div class="vstack gap-4">
 
         <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-primary text-nowrap m-0">Skutočné výdavky</h4>
+            <h4 class="text-primary text-nowrap m-0">Výdavky</h4>
             @if($spends->isNotEmpty())
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">

@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use App\Models\Category;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Budget extends Component
@@ -20,6 +21,13 @@ class Budget extends Component
     public function render()
     {
         return view('livewire.components.budget');
+    }
+
+    #[On('month-changed')]
+    public function test($month)
+    {
+        $this->month = $month;
+        $this->loadData();
     }
 
     private function monthRange(): array

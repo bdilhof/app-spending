@@ -4,19 +4,7 @@
             <div class="d-none d-lg-block mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <livewire:components.bible-verse :month="$month" />
-
-                    <!-- Month selector -->
-                    <div class="input-group input-group-lg w-auto">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="bi bi-calendar-month"></i>
-                        </span>
-                        <select wire:model.live="month" class="form-select">
-                            <option value="2026-01">Január 2026</option>
-                            <option value="2026-02">Február 2026</option>
-                            <option value="2026-03">Marec 2026</option>
-                        </select>
-                    </div>
-
+                    <livewire:components.month-selector />
                 </div>
             </div>
         </div>
