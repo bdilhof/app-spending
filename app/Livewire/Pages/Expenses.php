@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Expenses extends Component
 {
-    #[Title('Výdavky')]
+    // #[Title('Výdavky')]
     public function render()
     {
         return view('livewire.pages.expenses');

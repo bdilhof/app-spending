@@ -14,7 +14,7 @@
 
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="{{ route('app.dashboard') }}">
                     {{ config('app.name') }}
                 </a>
@@ -37,15 +37,12 @@
                             <li class="nav-item">
                                 <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.expenses')]) href="{{ route('app.expenses') }}">Výdavky</a>
                             </li>
-                            <li class="nav-item">
-                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.settings')]) href="{{ route('app.settings') }}">Nastavenia</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="container-fluid p-3">
+        <div class="container p-3">
             @if(isset($title))
                 <h1 class="h3">{{ $title }}</h1>
             @endif

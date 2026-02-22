@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Budget extends Component
 {
-    #[Title('Rozpočet')]
+    // #[Title('Rozpočet')]
     public function render()
     {
         return view('livewire.pages.budget');
