@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use Carbon\Carbon;
 use Livewire\Component;
@@ -19,7 +19,7 @@ class Budget extends Component
 
     public function render()
     {
-        return view('livewire.budget');
+        return view('livewire.components.budget');
     }
 
     private function monthRange(): array

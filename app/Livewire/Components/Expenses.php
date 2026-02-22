@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use Livewire\Component;
 use Carbon\Carbon;
@@ -83,6 +83,6 @@ class Expenses extends Component
 
     public function render()
     {
-        return view('livewire.expenses');
+        return view('livewire.components.expenses');
     }
 }

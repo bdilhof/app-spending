@@ -1,3 +1,3 @@
 <div>
-    <livewire:budget />
+    <livewire:components.budget />
 </div>

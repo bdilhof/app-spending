@@ -1,3 +1,3 @@
 <div>
-    <livewire:expenses month='2026-02' />
+    <livewire:components.expenses month='2026-02' />
 </div>

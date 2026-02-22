@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use Carbon\Carbon;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class BibleVerse extends Component
 
     public function render()
     {
-        return view('livewire.bible-verse');
+        return view('livewire.components.bible-verse');
     }
 
     private function getBibleVerse(): void
