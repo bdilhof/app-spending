@@ -1,11 +1,17 @@
 <div class="bg-white p-4">
     <div class="vstack gap-4">
+
+        <!-- Header -->
         <h4 class="text-primary m-0">Plán</h4>
+
+        <!-- Empty -->
         @if($items->isEmpty())
         <div class="alert alert-light m-0" role="alert">
             Žiaden plán
         </div>
         @endif
+
+        <!-- Table -->
         @if($items->isNotEmpty())
         <table class="table table-hover align-middle m-0">
             <thead class="">

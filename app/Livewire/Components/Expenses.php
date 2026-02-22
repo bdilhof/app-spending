@@ -5,6 +5,7 @@ namespace App\Livewire\Components;
 use App\Models\Category;
 use App\Models\Spend;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Expenses extends Component
@@ -55,6 +56,13 @@ class Expenses extends Component
     private function loadCategories()
     {
         $this->categories = Category::all();
+    }
+
+    #[On('month-changed')]
+    public function test($month)
+    {
+        $this->month = $month;
+        $this->loadData();
     }
 
     private function loadData(): void
