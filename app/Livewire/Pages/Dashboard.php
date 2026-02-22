@@ -55,7 +55,7 @@ class Dashboard extends Component
             ->get();
 
         $this->spends = Spend::query()
-            ->whereBetween('date', [$from, $to])
+            ->where('date', now()->format('Y-m-d'))
             ->when($this->is_discretionary, function ($query) {
                 $query->where('is_discretionary', $this->is_discretionary);
             })

@@ -11,6 +11,7 @@
                         <select wire:model.live="month" class="form-select">
                             <option value="2026-01">Január 2026</option>
                             <option value="2026-02">Február 2026</option>
+                            <option value="2026-03">Marec 2026</option>
                         </select>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
             <div class="bg-white p-4 mb-4">
                 <div class="vstack gap-4">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="text-primary text-nowrap m-0">Skutočné výdavky</h4>
+                        <h4 class="text-primary text-nowrap m-0">Dnes</h4>
                         @if($spends->isNotEmpty())
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" wire:model.live="is_discretionary" id="checkDefault">
@@ -127,7 +128,7 @@
         <div class="col-lg-4">
 
             <!-- OVERVIEW -->
-            <div class="bg-white p-4 mb-4 d-none d-lg-block">
+            <div class="bg-white p-4">
                 <div class="vstack gap-4">
                     <h4 class="text-primary m-0">Tento mesiac</h4>
                     <div>

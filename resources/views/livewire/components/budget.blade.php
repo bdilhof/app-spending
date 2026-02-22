@@ -1,4 +1,4 @@
-<div class="bg-white p-4 mb-4 d-none d-lg-block">
+<div class="bg-white p-4">
     <div class="vstack gap-4">
         <h4 class="text-primary m-0">Plán</h4>
         @if($items->isEmpty())
@@ -56,7 +56,7 @@
                         </td>
                         <td style="width: 350px">
                             <div class="progress" style="height: 5px; width: 100%">
-                                <div class="progress-bar bg-primary {{ $percentage <= 50 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
+                                <div class="progress-bar bg-success {{ $percentage <= 60 ? 'bg-warning' : '' }} {{ $percentage <= 25 ? 'bg-danger' : '' }}" style="width: {{ $percentage }}%"></div>
                             </div>
                         </td>
                     </tr>

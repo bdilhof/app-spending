@@ -37,9 +37,6 @@
                             <li class="nav-item">
                                 <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.expenses')]) href="{{ route('app.expenses') }}">Výdavky</a>
                             </li>
-                            <li class="nav-item">
-                                <a wire:navigate @class(['nav-link', 'active' => request()->routeIs('app.settings')]) href="{{ route('app.settings') }}">Nastavenia</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
