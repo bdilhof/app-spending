@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./docker/Dockerfile
     image: myapp:latest
     container_name: app
     restart: unless-stopped
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     volumes:
       - .:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network
     depends_on:
