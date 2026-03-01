@@ -41,6 +41,8 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - app-network
+    ports:
+      - "${FORWARD_DB_PORT:-3306}:3306"
 
   redis:
     image: redis:7

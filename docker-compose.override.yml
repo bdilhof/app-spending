@@ -11,7 +11,3 @@ services:
       - .:/var/www/html
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
-  db:
-    ports:
-      - "3306:3306"
