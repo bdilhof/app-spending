@@ -1,7 +1,7 @@
 # Local
 
 docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
-docker compose exec app bash # vstúpiš do containera
+docker compose exec app bash
 
 # Production
 
