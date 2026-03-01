@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  app:
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+    volumes:
+      - .:/var/www/html # kód mountnutý z lokálu
+    ports:
+      - "8000:8000" # napr. pre php artisan serve
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # ak potrebuješ prístup k hostovi
