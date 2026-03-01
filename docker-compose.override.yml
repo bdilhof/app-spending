@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: ghcr.io/bdilhof/app-manna:1.0.0
+    image: ghcr.io/bdilhof/app-manna:${APP_VERSION}
     environment:
       APP_ENV: local
       APP_DEBUG: true
