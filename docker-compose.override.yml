@@ -6,8 +6,12 @@ services:
       APP_ENV: local
       APP_DEBUG: "true"
     volumes:
-      - .:/var/www/html # kód mountnutý z lokálu
+      - .:/var/www/html
     ports:
-      - "8000:8000" # napr. pre php artisan serve
+      - "8000:8000"
     extra_hosts:
-      - "host.docker.internal:host-gateway" # ak potrebuješ prístup k hostovi
+      - "host.docker.internal:host-gateway"
+
+  db:
+    ports:
+      - "3306:3306"
