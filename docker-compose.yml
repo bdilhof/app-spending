@@ -1,8 +1,5 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
     image: ghcr.io/bdilhof/myapp:latest
     container_name: app
     restart: unless-stopped
