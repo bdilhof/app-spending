@@ -6,7 +6,3 @@ docker compose exec app bash
 # Production
 
 docker compose -f docker-compose.yml up -d
-
-# Run app
-
-php artisan serve --host=0.0.0.0 --port=8000

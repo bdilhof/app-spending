@@ -36,9 +36,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Copy aplikáciu z build stage
 COPY --from=build /var/www/html /var/www/html
 
-# Permissions
+# Permissions pre celý projekt
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+
+# Permissions pre Laravel storage a bootstrap/cache (zápis pre www-data)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Entry point
 CMD ["php-fpm"]
