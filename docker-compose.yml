@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/bdilhof/app-manna:1.0.0
+    image: ghcr.io/bdilhof/app-manna:1.0.1
     container_name: app
     restart: unless-stopped
     environment:
