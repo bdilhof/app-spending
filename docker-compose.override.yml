@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
+    image: ghcr.io/bdilhof/myapp:latest
     environment:
       APP_ENV: local
       APP_DEBUG: "true"

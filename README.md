@@ -1,6 +1,6 @@
 # Local
 
-docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.override.yml up -d --build
 docker compose exec app bash
 
 # Production
