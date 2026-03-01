@@ -8,9 +8,9 @@ use Livewire\Component;
 
 class MonthOverview extends Component
 {
-    public float $total;
+    public ?float $total;
 
-    public float $discrepancies;
+    public ?float $discrepancies;
 
     #[On('month-changed')]
     public function test($month)
